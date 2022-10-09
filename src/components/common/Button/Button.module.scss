@@ -1,0 +1,22 @@
+.button {
+  background-color: #005382;
+  padding: 13px 15px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  color: #fff;
+  transition: transform 50ms ease-in-out, background-color linear .2s;
+
+  &:hover {
+    background-color: #003f63;
+  }
+
+  &:active {
+    transform: scale(.95);
+  }
+}
