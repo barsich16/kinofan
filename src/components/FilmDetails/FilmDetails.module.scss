@@ -7,5 +7,116 @@
     padding: 40px;
     background-color: #fff;
     max-width: 1200px;
+
+    .return {
+      display: flex;
+      align-items: center;
+
+      span {
+        margin-left: 5px;
+      }
+    }
+
+    .info {
+      margin-top: 30px;
+      display: flex;
+
+      .image_block {
+        width: fit-content;
+        margin-right: 35px;
+        position: relative;
+        flex-shrink: 0;
+
+        .poster {
+          display: block;
+          position: relative;
+          width: 300px;
+          height: auto;
+          border-radius: 5px;
+          overflow: hidden;
+          object-fit: cover;
+          aspect-ratio: 2/3;
+          background-color: #141414;
+        }
+
+        span {
+          background-color: #00a340;
+          position: absolute;
+          top: 10px;
+          left: 10px;
+          padding: 6px 8px;
+          border-radius: 5px;
+          color: white;
+          line-height: 1;
+        }
+      }
+
+      .description {
+        width: 100%;
+
+        h1 {
+          font-weight: 800;
+          font-size: 40px;
+          line-height: 48px;
+          max-width: 650px;
+          margin-bottom: 20px;
+          color: #1f1f1f;
+        }
+
+        .film_name {
+          display: block;
+          font-weight: 300;
+          font-size: 20px;
+          line-height: 28px;
+          color: rgba(0,0,0,.5);
+          margin-bottom: 25px;
+        }
+
+        .btns {
+          display: flex;
+
+          .button {
+            border-radius: 30px;
+            padding: 13px 24px;
+            font-weight: 500;
+            font-size: 15px;
+
+            &__blue {
+              background-color: #005382;
+              margin-right: 15px;
+            }
+            &__gray {
+              background-color: #f2f2f2;
+              color: #141414;
+            }
+          }
+
+        }
+        .info_list {
+
+          .info_item {
+            display: flex;
+            align-items: center;
+
+            &:not(:last-child) {
+              margin-bottom: 20px;
+            }
+
+            span {
+              font-size: 15px;
+              font-weight: 300;
+            }
+
+            .info_name {
+              flex: 0 0 170px;
+              color: rgba(0,0,0,.5);
+            }
+
+          }
+        }
+
+
+      }
+    }
   }
 }

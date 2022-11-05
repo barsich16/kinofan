@@ -1,0 +1,51 @@
+.swiper {
+  padding-top: 10px;
+  margin: 40px 0;
+
+  .slide {
+    transition: all ease .4s ;
+
+    &:hover {
+      transform: translateY(-3px);
+
+      img {
+        opacity: 85%;
+      }
+    }
+
+    .image_block {
+      width: fit-content;
+      position: relative;
+
+
+      .image_wrapper {
+        border-radius: 10px;
+        overflow: hidden;
+        background-color: #000;
+        margin-bottom: 10px;
+
+        img {
+          max-width: 300px;
+          transition: all ease .3s ;
+          background-color: #000;
+        }
+      }
+    }
+
+    a {
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 24px;
+      color: #1f1f1f;
+      transition: color .3s;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: left;
+      cursor: pointer;
+
+      &:hover {
+        color: #005382;
+      }
+    }
+  }
+}

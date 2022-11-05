@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styles from './Header.module.scss';
 import { ReactComponent as Logo } from '../../assets/img/logo.svg';
 import { ReactComponent as SearchIcon } from '../../assets/img/search.svg';
@@ -6,41 +6,62 @@ import { ReactComponent as Arrow } from '../../assets/img/arrow-right.svg';
 import { Link } from 'react-router-dom';
 
 export const Header = () => {
+	const menuItem = useRef(null);
+
+	const onMenuItemClick = () => {
+		console.log(menuItem.current);
+		menuItem.current.checked = false;
+	};
+
 	return (
 		<div className={styles.header}>
 			<div className={`wrapper ${styles.inner}`}>
 				<div className={styles.menu}>
 					<div className='hamburger-menu'>
-						<input id='menu__toggle' type='checkbox' />
+						<input ref={menuItem} id='menu__toggle' type='checkbox' />
 						<label className='menu__btn' htmlFor='menu__toggle'>
 							<span></span>
 						</label>
 
 						<ul className='menu__box'>
+							<Link to={'/'} className='menu__item' onClick={onMenuItemClick}>
+								Головна
+							</Link>
 							<li>
-								<a className='menu__item' href='#'>
-									Головна
-								</a>
-							</li>
-							<li>
-								<a className='menu__item' href='#'>
+								<Link
+									to={'/films'}
+									className='menu__item'
+									onClick={onMenuItemClick}
+								>
 									Фільми
-								</a>
+								</Link>
 							</li>
 							<li>
-								<a className='menu__item' href='#'>
+								<Link
+									to={'/series'}
+									className='menu__item'
+									onClick={onMenuItemClick}
+								>
 									Серіали
-								</a>
+								</Link>
 							</li>
 							<li>
-								<a className='menu__item' href='#'>
+								<Link
+									to={'/cartoons'}
+									className='menu__item'
+									onClick={onMenuItemClick}
+								>
 									Мультфільми
-								</a>
+								</Link>
 							</li>
 							<li>
-								<a className='menu__item' href='#'>
+								<Link
+									to={'/favourites'}
+									className='menu__item'
+									onClick={onMenuItemClick}
+								>
 									Обране
-								</a>
+								</Link>
 							</li>
 						</ul>
 					</div>
