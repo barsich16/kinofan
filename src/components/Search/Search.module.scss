@@ -25,11 +25,44 @@
     }
 
     .body {
-      display: flex;
+      display: grid;
+      grid-template-columns: 270px auto;
+      column-gap: 60px;
       //justify-content: space-between;
 
       .filters {
-        width: 300px;
+
+        .choice {
+          margin-bottom: 15px;
+
+          .state {
+            border: 1px solid rgba(0, 0, 0, .2);
+            border-radius: 5px;
+            padding: 3px 10px;
+            font-size: 14px;
+            color: #1f1f1f;
+            font-weight: 300;
+          }
+        }
+
+        .btns {
+          margin-top: 35px;
+
+          .btn {
+            margin: 0 auto;
+            width: 100%;
+            justify-content: center;
+
+            &_trans {
+              margin-top: 15px;
+              background-color: #fff;
+              color: #005382;
+              border: 1px solid #005382;
+            }
+          }
+        }
+
+
       }
 
       .results {
