@@ -1,7 +1,6 @@
 import styles from './Intro.module.scss';
 import bg from '../../assets/img/bg1.jpg';
 import { ReactComponent as Arrow } from '../../assets/img/arrow-right.svg';
-import { Button } from '../common/Button/Button';
 import { Link } from 'react-router-dom';
 
 export const Intro = () => {

@@ -1,6 +1,4 @@
 import styles from './Catalog.module.scss';
-import image from '../../assets/img/example.jpg';
-import { ReactComponent as Arrow } from '../../assets/img/arrow-right.svg';
 import Ratio from 'react-ratio';
 import { Button } from '../common/Button/Button';
 import { useState } from 'react';

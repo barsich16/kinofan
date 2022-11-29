@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './Footer.module.scss';
-import { Exchanger } from '../Exchanger/Exchanger';
 import { ReactComponent as Logo } from '../../assets/img/logo.svg';
 
 export const Footer = () => {

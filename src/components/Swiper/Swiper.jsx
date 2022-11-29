@@ -1,4 +1,3 @@
-import React, { useRef, useState } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -10,7 +9,7 @@ import 'swiper/css/navigation';
 import styles from './Swiper.module.scss';
 
 // import required modules
-import { Pagination } from 'swiper';
+
 import { Navigation } from 'swiper';
 import image from '../../assets/img/example.jpg';
 

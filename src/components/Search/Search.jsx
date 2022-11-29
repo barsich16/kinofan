@@ -1,18 +1,27 @@
-import { translateMovieType } from '../../helpers/translateMovieType';
 import styles from './Search.module.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Accordeon } from '../UI/Accordeon/Accordeon';
 import { RangeBlock } from '../UI/RangeBlock/RangeBlock';
 import { Select } from '../UI/Select/Select';
 import { Radio } from '../UI/Radio/Radio';
 import { Formik } from 'formik';
 import { getCurrentYear } from '../../helpers/getCurrentYear';
-import { SearchInput } from '../UI/SearchInput/SearchInput';
 import { Button } from '../common/Button/Button';
+import { setPage } from '../../redux/slices/paginationSlice';
+import { useActions } from '../../hooks/useActions';
 
-export const Search = ({ type }) => {
-	const template = translateMovieType(type);
+export const Search = ({ isFetching }) => {
+	const {
+		resetFilters,
+		setFilterGenre,
+		setFilterRatings,
+		setFilterYears,
+		setSortByRelease,
+	} = useActions();
 	const currentYear = getCurrentYear();
+
+	// const { data, error, isFetching } = useGetAllFilmsQuery(filters);
+	// const films = data ? data.docs : [];
 
 	const genres = [
 		{ label: 'Всі жанри', value: '' },
@@ -42,156 +51,137 @@ export const Search = ({ type }) => {
 		{ label: 'Фентезі', value: 'фэнтези' },
 	];
 
+	useEffect(() => {
+		resetFilters();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
 	return (
-		<div className={styles.main}>
-			<div className={`wrapper ${styles.inner}`}>
-				<h1>{type === 'favourites' ? 'Обране' : `Всі ${template.naz}`}</h1>
-				<p className={styles.subtitle}>
-					{type === 'favourites'
-						? 'Список обраного кіно'
-						: `Підбірка ${template.rod} всього світу`}
-				</p>
-				<div className={styles.body}>
-					<div className={styles.filters}>
-						<Formik
-							initialValues={{
-								rating: [1, 10],
-								year: [1960, currentYear],
-								genres: genres[0],
-								sort: '-1',
-								test: 'test1',
-							}}
-							// validate={(values) => {
-							// 	const errors = {};
-							// 	if (!values.email) {
-							// 		errors.email = 'Required';
-							// 	} else if (
-							// 		!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-							// 	) {
-							// 		errors.email = 'Invalid email address';
-							// 	}
-							// 	return errors;
-							// }}
-							onSubmit={(values) => {
-								console.log(values);
-							}}
-						>
-							{({
-								values,
-								errors,
-								touched,
-								handleChange,
-								handleBlur,
-								handleSubmit,
-								handleReset,
-								isSubmitting,
-								/* and other goodies */
-							}) => (
-								<form onSubmit={handleSubmit}>
-									<div className={styles.choice}>
-										<span className={styles.state}>
-											Рейтинг: {values.rating[0]} - {values.rating[1]}
-										</span>
-									</div>
-									<div className={styles.choice}>
-										<span className={styles.state}>
-											Рік виробництва: {values.year[0]} - {values.year[1]}
-										</span>
-									</div>
-									<div className={styles.choice}>
-										<span className={styles.state}>
-											Жанр: {values.genres.label}
-										</span>
-									</div>
-									<div className={styles.choice}>
-										<span className={styles.state}>
-											Рік випуску:{' '}
-											{values.sort === '-1'
-												? 'Спочатку нові'
-												: 'Спочатку старі'}
-										</span>
-									</div>
+		<div className={styles.filters}>
+			<Formik
+				initialValues={{
+					rating: [1, 10],
+					year: [1960, currentYear],
+					genres: genres[0],
+					sort: '-1',
+				}}
+				// validate={(values) => {
+				// 	const errors = {};
+				// 	if (!values.email) {
+				// 		errors.email = 'Required';
+				// 	} else if (
+				// 		!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+				// 	) {
+				// 		errors.email = 'Invalid email address';
+				// 	}
+				// 	return errors;
+				// }}
+				onSubmit={(values) => {
+					const { sort, rating, year, genres } = values;
 
-									<Accordeon title={'Рейтинг'}>
-										<RangeBlock step={1} min={1} max={10} name='rating' />
-									</Accordeon>
+					const ratingString = `${rating[0]}-${rating[1]}`;
+					const yearString = `${year[0]}-${year[1]}`;
+					const ratings = rating[0] !== rating[1] ? ratingString : rating[0];
+					const years = year[0] !== year[1] ? yearString : year[0];
+					const genre =
+						genres.value !== ''
+							? `search[]=${genres.value}&field[]=genres.name`
+							: '';
+					console.log(values);
 
-									<Accordeon title={'Рік виробництва'}>
-										<RangeBlock
-											step={1}
-											min={1960}
-											max={currentYear}
-											name='year'
-										/>
-									</Accordeon>
+					setPage(1);
+					setFilterRatings(ratings);
+					setFilterYears(years);
+					setSortByRelease(sort);
+					setFilterGenre(genre);
+					console.log('Submit');
+					window.scrollTo({
+						top: 0,
+						left: 0,
+						behavior: 'smooth', //'smooth' для плавного прокруту
+					});
+				}}
+				onReset={(values, formikHelpers) => {
+					console.log(values, formikHelpers);
+				}}
+			>
+				{({
+					values,
+					// errors,
+					// touched,
+					// handleChange,
+					// handleBlur,
+					handleSubmit,
+					handleReset,
+					isSubmitting,
+					/* and other goodies */
+				}) => (
+					<form onSubmit={handleSubmit}>
+						<div className={styles.choice}>
+							<span className={styles.state}>
+								{isSubmitting}Рейтинг: {values.rating[0]} - {values.rating[1]}
+							</span>
+						</div>
+						<div className={styles.choice}>
+							<span className={styles.state}>
+								Рік виробництва: {values.year[0]} - {values.year[1]}
+							</span>
+						</div>
+						<div className={styles.choice}>
+							<span className={styles.state}>Жанр: {values.genres.label}</span>
+						</div>
+						<div className={styles.choice}>
+							<span className={styles.state}>
+								Рік випуску:{' '}
+								{values.sort === '-1' ? 'Спочатку нові' : 'Спочатку старі'}
+							</span>
+						</div>
 
-									<Accordeon title={'Жанри'}>
-										<Select options={genres} name='genres' />
-									</Accordeon>
+						<Accordeon title={'Рейтинг'}>
+							<RangeBlock step={1} min={1} max={10} name='rating' />
+						</Accordeon>
 
-									{/*<Accordeon title={'Тест'}>*/}
-									{/*	<SearchInput*/}
-									{/*		label='Тест'*/}
-									{/*		// value={values.test}*/}
-									{/*		// onChange={props.onChange}*/}
-									{/*		name='test'*/}
-									{/*	/>*/}
-									{/*</Accordeon>*/}
+						<Accordeon title={'Рік виробництва'}>
+							<RangeBlock step={1} min={1960} max={currentYear} name='year' />
+						</Accordeon>
 
-									<Accordeon title={'Рік випуску'}>
-										<Radio
-											label='Спочатку нові'
-											type='radio'
-											name='sort'
-											value='-1'
-										/>
-										<Radio
-											label='Спочатку старі'
-											name='sort'
-											type='radio'
-											value='1'
-										/>
-									</Accordeon>
-									{/*<input*/}
-									{/*	type='email'*/}
-									{/*	onChange={handleChange}*/}
-									{/*	onBlur={handleBlur}*/}
-									{/*	value={values.email}*/}
-									{/*/>*/}
-									{/*/!*{errors.email && touched.email && errors.email}*!/*/}
-									{/*<input*/}
-									{/*	type='password'*/}
-									{/*	name='password'*/}
-									{/*	onChange={handleChange}*/}
-									{/*	onBlur={handleBlur}*/}
-									{/*	value={values.password}*/}
-									{/*/>*/}
-									{/*{errors.password && touched.password && errors.password}*/}
-									{/*<button type='submit' disabled={isSubmitting}>*/}
-									{/*	Submit*/}
-									{/*</button>*/}
-									<div className={styles.btns}>
-										<Button
-											type='submit'
-											disabled={isSubmitting}
-											className={styles.btn}
-										>
-											<span>Застосувати</span>
-										</Button>
-										<Button
-											className={`${styles.btn} ${styles.btn_trans}`}
-											onClick={handleReset}
-										>
-											<span>Скинути</span>
-										</Button>
-									</div>
-								</form>
-							)}
-						</Formik>
-					</div>
-					<div className={styles.results}>results</div>
-				</div>
-			</div>
+						<Accordeon title={'Жанри'}>
+							<Select options={genres} name='genres' />
+						</Accordeon>
+
+						<Accordeon title={'Рік випуску'}>
+							<Radio
+								label='Спочатку нові'
+								type='radio'
+								name='sort'
+								value='-1'
+							/>
+							<Radio
+								label='Спочатку старі'
+								name='sort'
+								type='radio'
+								value='1'
+							/>
+						</Accordeon>
+
+						<div className={styles.btns}>
+							<Button
+								type='submit'
+								className={styles.btn}
+								disabled={isFetching}
+							>
+								<span>Застосувати</span>
+							</Button>
+							<Button
+								className={`${styles.btn} ${styles.btn_trans}`}
+								onClick={handleReset}
+							>
+								<span>Скинути</span>
+							</Button>
+						</div>
+					</form>
+				)}
+			</Formik>
 		</div>
 	);
 };

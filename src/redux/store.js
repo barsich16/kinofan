@@ -1,12 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
-import filmsReducer from './slices/filmsSlice';
+import filtersReducer from './slices/filtersSlice';
 // import { setupListeners } from '@reduxjs/toolkit/query';
 import { filmsApi } from './API/filmsAPI';
+import { paginationReducer } from './slices/paginationSlice';
 
 export const store = configureStore({
 	reducer: {
 		[filmsApi.reducerPath]: filmsApi.reducer,
-		films: filmsReducer,
+		filters: filtersReducer,
+		pagination: paginationReducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware().concat(filmsApi.middleware),

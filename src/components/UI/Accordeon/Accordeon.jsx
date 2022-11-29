@@ -1,6 +1,6 @@
 import styles from './Accordeon.module.scss';
 
-export const Accordeon = ({ children, className, title, ...props }) => {
+export const Accordeon = ({ children, title }) => {
 	return (
 		<div className={styles.tabs}>
 			<div className={styles.tab}>

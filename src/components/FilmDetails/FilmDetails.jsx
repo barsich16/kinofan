@@ -1,6 +1,5 @@
 import styles from './FilmDetails.module.scss';
 import { ReactComponent as ArrowLeft } from '../../assets/img/arrow-left.svg';
-import image from '../../assets/img/example.jpg';
 import { Button } from '../common/Button/Button';
 import { Carousel } from '../Swiper/Swiper';
 import { useParams } from 'react-router-dom';
@@ -16,14 +15,14 @@ export const FilmDetails = () => {
 	const {
 		name,
 		rating,
-		budget,
-		fees,
-		type,
-		description,
-		slogan,
+		// budget,
+		// fees,
+		// type,
+		// description,
+		// slogan,
 		year,
-		genres,
-		countries,
+		// genres,
+		// countries,
 		alternativeName,
 		poster,
 	} = data;

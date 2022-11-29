@@ -1,4 +1,3 @@
-import styles from './SliderRange.module.scss';
 import { Range } from 'react-range';
 import { SliderThumb } from './components/SliderThumb/SliderThumb';
 import { useRef } from 'react';
@@ -13,9 +12,6 @@ import { SliderTrack } from './components/SliderTrack/SliderTrack';
 
 export const SliderRange = ({ value, setValue, step, min, max, name }) => {
 	const initialValueRef = useRef(value);
-	const onChangeRange = (val) => {
-		console.log(val);
-	};
 	const handleRenderThumb = ({ props, value, index }) => {
 		return (
 			<SliderThumb

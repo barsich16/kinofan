@@ -6,7 +6,7 @@ export const Exchanger = () => {
 	const isCalculated = useRef(false);
 
 	const [privat, setPrivat] = useState({ eur: '', usd: '' });
-	const [ftx, setFtx] = useState(0);
+	// const [ftx, setFtx] = useState(0);
 	useEffect(() => {
 		fetch('https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11')
 			.then((res) => res.json())

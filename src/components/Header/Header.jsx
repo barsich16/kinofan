@@ -2,7 +2,6 @@ import React, { useRef } from 'react';
 import styles from './Header.module.scss';
 import { ReactComponent as Logo } from '../../assets/img/logo.svg';
 import { ReactComponent as SearchIcon } from '../../assets/img/search.svg';
-import { ReactComponent as Arrow } from '../../assets/img/arrow-right.svg';
 import { Link } from 'react-router-dom';
 
 export const Header = () => {

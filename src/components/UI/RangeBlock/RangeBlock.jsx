@@ -8,7 +8,9 @@ import { useField } from 'formik';
 // max={10}
 // name='rating'
 
-export const RangeBlock = ({ name, ...props }) => {
+export const RangeBlock = (props) => {
+	const { name, min, max } = props;
+
 	const [field, , helpers] = useField(name);
 	const { value } = field;
 	const { setValue } = helpers;
@@ -19,17 +21,23 @@ export const RangeBlock = ({ name, ...props }) => {
 				<SearchInput
 					label='Від'
 					value={value[0]}
+					min={min}
+					max={value[1]}
+					type='number'
 					onChange={(newValue) => setValue([newValue, value[1]])}
 					name={name}
 				/>
 				<SearchInput
 					label='До'
 					value={value[1]}
+					max={max}
+					min={value[0]}
+					type='number'
 					onChange={(newValue) => setValue([value[0], newValue])}
 					name={name}
 				/>
 			</div>
-			<SliderRange value={value} name={name} setValue={setValue} {...props} />
+			<SliderRange value={value} setValue={setValue} {...props} />
 		</div>
 	);
 };
