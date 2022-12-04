@@ -8,6 +8,17 @@ const initialState = {
 		sortByRelease: '-1',
 		genre: '',
 	},
+	filters2: {
+		minYear: '1900-01-01',
+		maxYear: `${getCurrentYear()}-12-31`,
+		minRating: '0',
+		maxRating: '10',
+		with_genres: '',
+		// year: `1960-${getCurrentYear()}`,
+		// rating: '1-10',
+		// sortByRelease: '-1',
+		// genre: '',
+	},
 };
 
 export const filtersSlice = createSlice({
@@ -16,6 +27,8 @@ export const filtersSlice = createSlice({
 	reducers: {
 		setFilterYears: (state, action) => {
 			console.log(state);
+			//TODO: добавити рік по шаблону з місяцем, й так само до остальних
+			state.filters.minYear = action.payload;
 			state.filters.year = action.payload;
 		},
 		setFilterRatings: (state, action) => {

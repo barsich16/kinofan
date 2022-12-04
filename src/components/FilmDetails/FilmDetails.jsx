@@ -13,18 +13,23 @@ export const FilmDetails = () => {
 	}
 
 	const {
-		name,
-		rating,
+		title,
+		original_title,
+		overview,
+		poster_path,
+		release_date,
+		vote_average,
+		// rating,
 		// budget,
 		// fees,
 		// type,
 		// description,
 		// slogan,
-		year,
+		// year,
 		// genres,
 		// countries,
-		alternativeName,
-		poster,
+		// alternativeName,
+		// poster,
 	} = data;
 	return (
 		<div className={styles.details}>
@@ -35,15 +40,19 @@ export const FilmDetails = () => {
 
 				<div className={styles.info}>
 					<div className={styles.image_block}>
-						<img src={poster.url} alt='Image' className={styles.poster} />
-						<span>{rating.kp.toFixed(1)}</span>
+						<img
+							src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+							alt='Image'
+							className={styles.poster}
+						/>
+						<span>{vote_average.toFixed(1)}</span>
 					</div>
 
 					<div className={styles.description}>
 						<h1>
-							{name} ({year})
+							{title || original_title} {release_date.slice(0, 4)}
 						</h1>
-						<span className={styles.film_name}>{alternativeName}</span>
+						<span className={styles.film_name}>{original_title}</span>
 						<div className={styles.btns}>
 							<Button className={`${styles.button} ${styles.button__blue}`}>
 								Дивитиcя

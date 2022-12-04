@@ -1,20 +1,20 @@
 import styles from '../Filters.module.scss';
 import { useSelector } from 'react-redux';
-import { useGetFilmsQuery } from '../../../redux/API/filmsAPI';
+// import { useGetFilmsQuery } from '../../../redux/API/filmsAPI';
 import { Gallery } from '../Gallery/Gallery';
 import { Search } from '../../Search/Search';
 
 export const Films = () => {
 	const { filters } = useSelector((state) => state.filters);
 	const { page } = useSelector((state) => state.pagination);
-	const {
-		data = {},
-		isLoading,
-		isFetching,
-	} = useGetFilmsQuery({
-		page,
-		filters,
-	});
+	// const {
+	// 	data = {},
+	// 	isLoading,
+	// 	isFetching,
+	// } = useGetFilmsQuery({
+	// 	page,
+	// 	filters,
+	// });
 	return (
 		<div className={styles.main}>
 			<div className={`wrapper ${styles.inner}`}>
@@ -23,16 +23,17 @@ export const Films = () => {
 
 				<div className={styles.body}>
 					<div className={styles.filters}>
-						<Search isFetching={isFetching} />
+						{/*<Search isFetching={isFetching} />*/}
+						<Search type='movie' />
 					</div>
-					{!isFetching && !isLoading && (
-						<Gallery
-							isLoading={isLoading}
-							data={data}
-							isFetching={isFetching}
-							page={page}
-						/>
-					)}
+					{/*{!isFetching && !isLoading && (*/}
+					{/*	<Gallery*/}
+					{/*		isLoading={isLoading}*/}
+					{/*		data={data}*/}
+					{/*		isFetching={isFetching}*/}
+					{/*		page={page}*/}
+					{/*	/>*/}
+					{/*)}*/}
 				</div>
 			</div>
 		</div>

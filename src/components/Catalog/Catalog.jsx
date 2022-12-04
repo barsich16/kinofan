@@ -1,21 +1,33 @@
 import styles from './Catalog.module.scss';
 import Ratio from 'react-ratio';
 import { Button } from '../common/Button/Button';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useGetAllFilmsQuery } from '../../redux/API/filmsAPI';
 import { convertMovieType } from '../../helpers/convertMovieType';
 import { Link } from 'react-router-dom';
 
 export const Catalog = () => {
-	const [limit, setLimit] = useState(10);
-	const { data, error, isFetching } = useGetAllFilmsQuery(limit);
-	const films = data ? data.docs : [];
-	console.log('Films', films);
-	console.log('Limit', limit);
+	const [page, setPage] = useState(1);
+	const [films, setFilms] = useState([]);
+	const [countForView, setCountForView] = useState(10);
+	const { data, error, isFetching } = useGetAllFilmsQuery(page);
+
+	useEffect(() => {
+		if (data) {
+			setFilms([...films, ...data.results]);
+		}
+	}, [data]);
+
+	// return <h1>Test</h1>;
 
 	const increaseLimit = () => {
-		setLimit((currentLimit) => {
-			return currentLimit + 10;
+		if (countForView + 10 > page * 20) {
+			setPage((currentPage) => {
+				return currentPage + 1;
+			});
+		}
+		setCountForView((countForView) => {
+			return countForView + 10;
 		});
 	};
 
@@ -28,25 +40,30 @@ export const Catalog = () => {
 				</Button>
 			</div>
 			<div className={styles.items}>
-				{films.map((film) => (
-					<div className={styles.item} key={film.id}>
-						<Link to={`/film/${film.id}`}>
-							<Ratio ratio={2 / 3} className={styles.ratio}>
-								<div className={styles.image}>
-									<img src={film.poster.url} alt='image' />
-									<span>{film.rating.kp.toFixed(1)}</span>
-								</div>
-							</Ratio>
-						</Link>
+				{films.map((film, index) => {
+					if (index < countForView) {
+						return (
+							<div className={styles.item} key={film.id}>
+								<Link to={`/film/${film.id}`}>
+									<Ratio ratio={2 / 3} className={styles.ratio}>
+										<div className={styles.image}>
+											<img
+												src={`https://image.tmdb.org/t/p/w300${film.poster_path}`}
+												alt='image'
+											/>
+											<span>{film.vote_average}</span>
+										</div>
+									</Ratio>
+								</Link>
 
-						<Link to={`/film/${film.id}`}>
-							{film.name || film.alternativeName}
-						</Link>
-						<p>
-							{film.year}, {convertMovieType(film.type)}
-						</p>
-					</div>
-				))}
+								<Link to={`/film/${film.id}`}>
+									{film.title || film.original_title}
+								</Link>
+								<p>{film.release_date.slice(0, 4)}</p>
+							</div>
+						);
+					}
+				})}
 			</div>
 
 			<Button className={styles.more} onClick={increaseLimit}>
