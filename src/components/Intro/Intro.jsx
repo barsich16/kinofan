@@ -7,7 +7,7 @@ export const Intro = () => {
 	return (
 		<div style={{ background: `center 20% / cover no-repeat url(${bg})` }}>
 			<div className={`wrapper ${styles.inner}`}>
-				<h1>Тор: Любов та грім</h1>
+				<h1>Торte: Любов та грім</h1>
 				<p>
 					Джейн Фостер бере на себе обов'язки Бога-громовержця і стає власницею
 					молоту Мйольнера
