@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 
 export const Item = ({ data = {} }) => {
 	const {
-		shortDescription: desc,
+		overview: desc,
 		id,
-		name,
-		rating,
-		year,
-		movieLength,
-		poster,
+		title,
+		vote_average: rating,
+		release_date: year,
+		// movieLength,
+		poster_path,
 	} = data;
 	return (
 		<div className={styles.item}>
@@ -18,21 +18,21 @@ export const Item = ({ data = {} }) => {
 				<Link to={`/film/${id}`} className={styles.poster}>
 					<img
 						src={
-							poster
-								? poster.previewUrl || poster.url
-								: 'https://place-hold.it/64x96'
+							`https://image.tmdb.org/t/p/w300${poster_path}` ||
+							'https://place-hold.it/64x96'
 						}
 						alt=''
 					/>
 				</Link>
 				<div className={styles.info}>
 					<Link to={`/film/${id}`} className={styles.link}>
-						<h2 className={styles.name}>{name}</h2>
+						<h2 className={styles.name}>{title}</h2>
 					</Link>
 
-					<span className={styles.year}>{`${year}${
-						movieLength ? `, ${movieLength} мин.` : ''
-					} `}</span>
+					{/*<span className={styles.year}>{`${year}*/}
+					{/*${movieLength ? `, ${movieLength} мин.` : ''} */}
+					{/*`}</span>*/}
+					<span className={styles.year}>{`${year.slice(0, 4)}`}</span>
 					<Link to={`/film/${id}`} className={styles.link}>
 						<p className={styles.desc}>{desc}</p>
 					</Link>
@@ -42,10 +42,10 @@ export const Item = ({ data = {} }) => {
 			<div className={styles.right}>
 				<span
 					className={`${styles.rating} ${
-						rating.kp > 5 ? styles.rating_green : styles.rating_red
+						rating > 5 ? styles.rating_green : styles.rating_red
 					}`}
 				>
-					{rating.kp.toFixed(1)}
+					{rating.toFixed(1)}
 				</span>
 				<button className={`btn ${styles.btn}`}>
 					<FavouritesIcon width={15} height={15} className={styles.icon} />

@@ -7,7 +7,7 @@ import { useActions } from '../../../hooks/useActions';
 export const Gallery = ({ data = {}, isLoading, IsFetching, page }) => {
 	const { setPage } = useActions();
 	if (isLoading) return 'Завантаження...';
-	const { docs: items, pages = 1, total = 1 } = data;
+	const { results: items = [], total_pages = 1 } = data;
 
 	const changePage = (newPage) => {
 		setPage(newPage);
@@ -18,9 +18,9 @@ export const Gallery = ({ data = {}, isLoading, IsFetching, page }) => {
 		});
 	};
 
-	console.log(pages);
-	console.log(total);
-	if (total < 1) return <p>По вашому запиту нічого не знайдено...</p>;
+	console.log(page);
+	console.log(total_pages);
+	if (total_pages < 1) return <p>По вашому запиту нічого не знайдено...</p>;
 	return (
 		<div className={styles.main}>
 			<div className={styles.films}>
@@ -44,19 +44,19 @@ export const Gallery = ({ data = {}, isLoading, IsFetching, page }) => {
 					<ArrowRight width={18} height={18} className={styles.arrow_left} />
 				</button>
 				<div className={styles.pages}>
-					{page} / {pages}
+					{page} / {total_pages}
 				</div>
 				<button
 					className={styles.arrow}
-					disabled={page === pages}
+					disabled={page === total_pages}
 					onClick={() => changePage(page + 1)}
 				>
 					<ArrowRight width={18} height={18} />
 				</button>
 				<button
 					className={styles.arrow}
-					disabled={page === pages}
-					onClick={() => changePage(pages)}
+					disabled={page === total_pages}
+					onClick={() => changePage(total_pages)}
 				>
 					<DoubleArrowRight />
 				</button>

@@ -2,18 +2,20 @@ import { createSlice } from '@reduxjs/toolkit';
 import { getCurrentYear } from '../../helpers/getCurrentYear';
 
 const initialState = {
+	// filters: {
+	// 	year: `1960-${getCurrentYear()}`,
+	// 	rating: '1-10',
+	// 	sortByRelease: '-1',
+	// 	genre: '',
+	// },
 	filters: {
-		year: `1960-${getCurrentYear()}`,
-		rating: '1-10',
-		sortByRelease: '-1',
-		genre: '',
-	},
-	filters2: {
 		minYear: '1900-01-01',
 		maxYear: `${getCurrentYear()}-12-31`,
 		minRating: '0',
 		maxRating: '10',
-		with_genres: '',
+		minLength: 0,
+		maxLength: 400,
+		genres: '',
 		// year: `1960-${getCurrentYear()}`,
 		// rating: '1-10',
 		// sortByRelease: '-1',
@@ -26,19 +28,24 @@ export const filtersSlice = createSlice({
 	initialState,
 	reducers: {
 		setFilterYears: (state, action) => {
-			console.log(state);
-			//TODO: добавити рік по шаблону з місяцем, й так само до остальних
-			state.filters.minYear = action.payload;
-			state.filters.year = action.payload;
+			// console.log(state);
+			state.filters.minYear = `${action.payload[0]}-01-01`;
+			state.filters.maxYear = `${action.payload[1]}-12-31`;
 		},
 		setFilterRatings: (state, action) => {
-			state.filters.rating = action.payload;
+			state.filters.minRating = action.payload[0];
+			state.filters.maxRating = action.payload[1];
 		},
-		setSortByRelease: (state, action) => {
-			state.filters.sortByRelease = action.payload;
+		setFilterLength: (state, action) => {
+			console.log(action);
+			state.filters.minLength = action.payload[0];
+			state.filters.maxLength = action.payload[1];
 		},
+		// setSortByRelease: (state, action) => {
+		// 	state.filters.sortByRelease = action.payload;
+		// },
 		setFilterGenre: (state, action) => {
-			state.filters.genre = action.payload;
+			state.filters.genres = action.payload;
 		},
 		resetFilters: (state) => {
 			state.filters = initialState.filters;
@@ -49,7 +56,8 @@ export const filtersSlice = createSlice({
 export const {
 	setFilterYears,
 	setFilterRatings,
-	setSortByRelease,
+	setFilterLength,
+	// setSortByRelease,
 	setFilterGenre,
 	resetFilters,
 } = filtersSlice.actions;

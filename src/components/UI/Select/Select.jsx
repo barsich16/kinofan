@@ -1,10 +1,13 @@
 import ReactSelect from 'react-select';
+import makeAnimated from 'react-select/animated';
 import { useField } from 'formik';
 
 export const Select = ({ options, name }) => {
 	const [field, , helpers] = useField(name);
 	const { value } = field;
 	const { setValue } = helpers;
+
+	const animatedComponents = makeAnimated();
 
 	const selectStyle = {
 		indicatorSeparator: (base) => ({
@@ -47,9 +50,12 @@ export const Select = ({ options, name }) => {
 	return (
 		<ReactSelect
 			options={options}
+			isMulti
+			closeMenuOnSelect={false}
+			components={animatedComponents}
 			styles={selectStyle}
 			noOptionsMessage={() => 'Нічого не знайдено!'}
-			placeholder='Оберіть жанр...'
+			placeholder='Оберіть жанри...'
 			onChange={(newValue) => setValue(newValue)}
 			value={value}
 		/>

@@ -76,7 +76,9 @@ export const filmsApi = createApi({
 				`/discover/movie?api_key=${token}&language=${lang}&page=${page}
 				&release_date.gte=${filters.minYear}&release_date.lte=${filters.maxYear}
 				&vote_average.gte=${filters.minRating}&vote_average.lte=${filters.maxRating}
-				&with_genres=${filters.genres}`,
+				&with_runtime.gte=${filters.minLength}&with_runtime.lte=${filters.maxLength}
+				${filters.genres !== '' ? `&with_genres=${filters.genres}` : ''}
+				`,
 		}),
 
 		// getFilmByFilters: builder.query({
@@ -114,6 +116,7 @@ export const filmsApi = createApi({
 export const {
 	useGetAllFilmsQuery,
 	useGetFilmByIdQuery,
+	useGetFilmsQuery,
 	// useGetCartoonsQuery,
 	// useGetFilmsQuery,
 	useGetFilmsGenresQuery,

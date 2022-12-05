@@ -7,6 +7,7 @@ import { SearchPage } from './pages/SearchPage';
 import { Cartoons } from './components/Filters/Cartoons/Cartoons';
 import { Films } from './components/Filters/Films/Films';
 import { Series } from './components/Filters/Series/Series';
+import { ExchangerPage } from './pages/ExchangerPage';
 
 function App() {
 	return (
@@ -22,6 +23,7 @@ function App() {
 					element={<SearchPage type={'favourites'} />}
 				/>
 				<Route path='/film/:id' element={<FilmPage />} />
+				<Route path='/exchanger' element={<ExchangerPage />} />
 				<Route path='*' element={<NotFound />} />
 			</Route>
 		</Routes>

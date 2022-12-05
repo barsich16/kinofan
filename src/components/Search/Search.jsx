@@ -10,6 +10,7 @@ import { Button } from '../common/Button/Button';
 import { setPage } from '../../redux/slices/paginationSlice';
 import { useActions } from '../../hooks/useActions';
 import { useGetFilmsGenresQuery } from '../../redux/API/filmsAPI';
+import { genresNameToString } from '../../helpers/genresNameToString';
 
 export const Search = ({ isFetching, type }) => {
 	const {
@@ -17,9 +18,11 @@ export const Search = ({ isFetching, type }) => {
 		setFilterGenre,
 		setFilterRatings,
 		setFilterYears,
-		setSortByRelease,
+		setFilterLength,
+		// setSortByRelease,
 	} = useActions();
 	const currentYear = getCurrentYear();
+	console.log('rerender');
 
 	const { data: genres, error } = useGetFilmsGenresQuery(type);
 
@@ -62,6 +65,7 @@ export const Search = ({ isFetching, type }) => {
 				initialValues={{
 					rating: [1, 10],
 					year: [1900, currentYear],
+					length: [0, 400],
 					// genres: genres[0],
 					// sort: '-1',
 				}}
@@ -79,23 +83,21 @@ export const Search = ({ isFetching, type }) => {
 
 				onSubmit={(values) => {
 					console.log(values);
-					const { sort, rating, year, genres } = values;
+					const { sort, rating, year, genres = [], length } = values;
 
 					// const ratingString = `${rating[0]}-${rating[1]}`;
 					// const yearString = `${year[0]}-${year[1]}`;
 					// const ratings = rating[0] !== rating[1] ? ratingString : rating[0];
 					// const years = year[0] !== year[1] ? yearString : year[0];
-					// const genre =
-					// 	genres.value !== ''
-					// 		? `search[]=${genres.value}&field[]=genres.name`
-					// 		: '';
-					// console.log(values);
+					const genresId = genres.map((genre) => genre.value);
+					const genre = genresId.length > 0 ? genresId.join(',') : '';
 					//
-					// setPage(1);
-					// setFilterRatings(ratings);
-					// setFilterYears(years);
+					setPage(1);
+					setFilterRatings(rating);
+					setFilterYears(year);
+					setFilterLength(length);
 					// setSortByRelease(sort);
-					// setFilterGenre(genre);
+					setFilterGenre(genre);
 					console.log('Submit');
 					window.scrollTo({
 						top: 0,
@@ -119,19 +121,21 @@ export const Search = ({ isFetching, type }) => {
 					/* and other goodies */
 				}) => (
 					<form onSubmit={handleSubmit}>
-						{/*<div className={styles.choice}>*/}
-						{/*	<span className={styles.state}>*/}
-						{/*		{isSubmitting}Рейтинг: {values.rating[0]} - {values.rating[1]}*/}
-						{/*	</span>*/}
-						{/*</div>*/}
-						{/*<div className={styles.choice}>*/}
-						{/*	<span className={styles.state}>*/}
-						{/*		Рік виробництва: {values.year[0]} - {values.year[1]}*/}
-						{/*	</span>*/}
-						{/*</div>*/}
-						{/*<div className={styles.choice}>*/}
-						{/*	<span className={styles.state}>Жанр: {values.genres.label}</span>*/}
-						{/*</div>*/}
+						<div className={styles.choice}>
+							<span className={styles.state}>
+								Рейтинг: {values.rating[0]} - {values.rating[1]}
+							</span>
+						</div>
+						<div className={styles.choice}>
+							<span className={styles.state}>
+								Рік виробництва: {values.year[0]} - {values.year[1]}
+							</span>
+						</div>
+						<div className={styles.choice}>
+							<span className={styles.state}>
+								Жанри: {genresNameToString(values.genres)}
+							</span>
+						</div>
 						{/*<div className={styles.choice}>*/}
 						{/*	<span className={styles.state}>*/}
 						{/*		Рік випуску:{' '}*/}
@@ -149,6 +153,10 @@ export const Search = ({ isFetching, type }) => {
 
 						<Accordeon title={'Жанри'}>
 							<Select options={genres} name='genres' />
+						</Accordeon>
+
+						<Accordeon title={'Тривалість'}>
+							<RangeBlock step={10} min={0} max={400} name='length' />
 						</Accordeon>
 
 						{/*<Accordeon title={'Рік випуску'}>*/}
