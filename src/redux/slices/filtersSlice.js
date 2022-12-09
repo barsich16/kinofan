@@ -16,6 +16,7 @@ const initialState = {
 		minLength: 0,
 		maxLength: 400,
 		genres: '',
+		sortBy: 'popularity.desc',
 		// year: `1960-${getCurrentYear()}`,
 		// rating: '1-10',
 		// sortByRelease: '-1',
@@ -41,6 +42,9 @@ export const filtersSlice = createSlice({
 			state.filters.minLength = action.payload[0];
 			state.filters.maxLength = action.payload[1];
 		},
+		setSort: (state, action) => {
+			state.filters.sortBy = action.payload;
+		},
 		// setSortByRelease: (state, action) => {
 		// 	state.filters.sortByRelease = action.payload;
 		// },
@@ -57,7 +61,7 @@ export const {
 	setFilterYears,
 	setFilterRatings,
 	setFilterLength,
-	// setSortByRelease,
+	setSort,
 	setFilterGenre,
 	resetFilters,
 } = filtersSlice.actions;

@@ -1,11 +1,15 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import styles from './Header.module.scss';
 import { ReactComponent as Logo } from '../../assets/img/logo.svg';
 import { ReactComponent as SearchIcon } from '../../assets/img/search.svg';
 import { Link } from 'react-router-dom';
+import { useDebounce } from '../../hooks/useDebounce';
+import { BookSearchResults } from './MediaSearchResults/MediaSearchResult';
 
 export const Header = () => {
 	const menuItem = useRef(null);
+	const [searchTerm, setSearchTerm] = useState('');
+	const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
 	const onMenuItemClick = () => {
 		console.log(menuItem.current);
@@ -46,15 +50,6 @@ export const Header = () => {
 							</li>
 							<li>
 								<Link
-									to={'/cartoons'}
-									className='menu__item'
-									onClick={onMenuItemClick}
-								>
-									Мультфільми
-								</Link>
-							</li>
-							<li>
-								<Link
 									to={'/favourites'}
 									className='menu__item'
 									onClick={onMenuItemClick}
@@ -71,19 +66,24 @@ export const Header = () => {
 				<div className={styles.searchbar}>
 					<input
 						className={`input ${styles.input}`}
-						// value={values.revo}
-						// onChange={handleChange}
+						value={searchTerm}
+						onChange={(e) => setSearchTerm(e.target.value)}
 						placeholder='Пошук...'
 						id='search'
 						name='search'
 						type='text'
 					/>
+					{debouncedSearchTerm !== '' && (
+						<div></div>
+						<BookSearchResults searchTerm={debouncedSearchTerm} />
+					)}
 					<button className={`buttonBase ${styles.searchBtn}`}>
 						<SearchIcon width={20} height={20} className={styles.searchIcon} />
 					</button>
 				</div>
 				<div className={styles.login}>Увійти</div>
 			</div>
+
 		</div>
 	);
 };

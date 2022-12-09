@@ -6,12 +6,16 @@ export const Item = ({ data = {} }) => {
 	const {
 		overview: desc,
 		id,
-		title,
+		title: filmName,
+		name: seriesName,
 		vote_average: rating,
-		release_date: year,
+		release_date: filmDate,
+		first_air_date: seriesDate,
 		// movieLength,
 		poster_path,
 	} = data;
+	const name = filmName || seriesName;
+	const date = filmDate || seriesDate;
 	return (
 		<div className={styles.item}>
 			<div className={styles.left}>
@@ -26,13 +30,13 @@ export const Item = ({ data = {} }) => {
 				</Link>
 				<div className={styles.info}>
 					<Link to={`/film/${id}`} className={styles.link}>
-						<h2 className={styles.name}>{title}</h2>
+						<h2 className={styles.name}>{name}</h2>
 					</Link>
 
 					{/*<span className={styles.year}>{`${year}*/}
 					{/*${movieLength ? `, ${movieLength} мин.` : ''} */}
 					{/*`}</span>*/}
-					<span className={styles.year}>{`${year.slice(0, 4)}`}</span>
+					<span className={styles.year}>{date.slice(0, 4)}</span>
 					<Link to={`/film/${id}`} className={styles.link}>
 						<p className={styles.desc}>{desc}</p>
 					</Link>

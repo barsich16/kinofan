@@ -55,12 +55,17 @@ export const filmsApi = createApi({
 	reducerPath: 'filmsApi',
 	baseQuery: fetchBaseQuery({ baseUrl: 'https://api.themoviedb.org/3' }),
 	endpoints: (builder) => ({
-		getAllFilms: builder.query({
-			query: (page = 1) =>
-				`/movie/popular?api_key=${token}&page=${page}&language=${lang}`,
+		getNewFilmsByType: builder.query({
+			query: ({ page = 1, type = 'movie' }) =>
+				`/${type}/popular?api_key=${token}&page=${page}&language=${lang}`,
 		}),
+
 		getFilmById: builder.query({
-			query: (id) => `/movie/${id}?api_key=${token}&language=${lang}`,
+			query: ({ id, type }) =>
+				`/${type}/${id}?api_key=${token}&language=${lang}`,
+		}),
+		getLatestMovie: builder.query({
+			query: () => `/movie/latest?api_key=${token}&language=${lang}`,
 		}),
 		getFilmsGenres: builder.query({
 			query: (type) => `/genre/${type}/list?api_key=${token}&language=${lang}`,
@@ -73,12 +78,29 @@ export const filmsApi = createApi({
 		}),
 		getFilms: builder.query({
 			query: ({ filters, page }) =>
-				`/discover/movie?api_key=${token}&language=${lang}&page=${page}
+				`/discover/movie?api_key=${token}&language=${lang}&page=${page}&sort_by=${
+					filters.sortBy
+				}
 				&release_date.gte=${filters.minYear}&release_date.lte=${filters.maxYear}
 				&vote_average.gte=${filters.minRating}&vote_average.lte=${filters.maxRating}
 				&with_runtime.gte=${filters.minLength}&with_runtime.lte=${filters.maxLength}
 				${filters.genres !== '' ? `&with_genres=${filters.genres}` : ''}
 				`,
+		}),
+		getSeries: builder.query({
+			query: ({ filters, page }) =>
+				`/discover/tv?api_key=${token}&language=${lang}&page=${page}&sort_by=${
+					filters.sortBy
+				}
+				&release_date.gte=${filters.minYear}&release_date.lte=${filters.maxYear}
+				&vote_average.gte=${filters.minRating}&vote_average.lte=${filters.maxRating}
+				&with_runtime.gte=${filters.minLength}&with_runtime.lte=${filters.maxLength}
+				${filters.genres !== '' ? `&with_genres=${filters.genres}` : ''}
+				`,
+		}),
+		searchMedia: builder.query({
+			query: (term = '') =>
+				`/search/multi?api_key=${token}&language=${lang}&query=${term}`,
 		}),
 
 		// getFilmByFilters: builder.query({
@@ -100,10 +122,10 @@ export const filmsApi = createApi({
 				`/movie?${filters.genre}&search[]=${filters.year}&field[]=year&search[]=${filters.rating}&field=rating.kp&search=!null&field=name&search=3&field=typeNumber&search=!null&field=votes.kp&sortField=year&sortType=${filters.sortByRelease}&limit=10&page=${page}&token=${token}`,
 		}),
 
-		getSeries: builder.query({
-			query: ({ filters, page }) =>
-				`/movie?${filters.genre}&search[]=${filters.year}&field[]=year&search[]=${filters.rating}&field=rating.kp&search=!null&field=name&search=1&field=typeNumber&search=!null&field=votes.kp&sortField=year&sortType=${filters.sortByRelease}&limit=10&page=${page}&token=${token}`,
-		}),
+		// getSeries: builder.query({
+		// 	query: ({ filters, page }) =>
+		// 		`/movie?${filters.genre}&search[]=${filters.year}&field[]=year&search[]=${filters.rating}&field=rating.kp&search=!null&field=name&search=1&field=typeNumber&search=!null&field=votes.kp&sortField=year&sortType=${filters.sortByRelease}&limit=10&page=${page}&token=${token}`,
+		// }),
 		getInfo: builder.query({
 			query: ({ filters, page, type }) =>
 				`/movie?${filters.genre}&search[]=${filters.year}&field[]=year&search[]=${filters.rating}&field=rating.kp&search=!null&field=name&search=${type}&field=typeNumber&search=!null&field=votes.kp&sortField=year&sortType=${filters.sortByRelease}&limit=10&page=${page}&token=${token}`,
@@ -114,12 +136,14 @@ export const filmsApi = createApi({
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
 export const {
-	useGetAllFilmsQuery,
+	useGetNewFilmsByTypeQuery,
 	useGetFilmByIdQuery,
 	useGetFilmsQuery,
+	useGetLatestMovieQuery,
+	useSearchMediaQuery,
 	// useGetCartoonsQuery,
 	// useGetFilmsQuery,
 	useGetFilmsGenresQuery,
-	// useGetSeriesQuery,
+	useGetSeriesQuery,
 	// useGetInfoQuery,
 } = filmsApi;

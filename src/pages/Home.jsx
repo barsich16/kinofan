@@ -1,12 +1,13 @@
 import React from 'react';
 import { Intro } from '../components/Intro/Intro';
-import { Catalog } from '../components/Catalog/Catalog';
+import { Catalog, CatalogContainer } from '../components/Catalog/Catalog';
 
 export const Home = () => {
 	return (
 		<>
 			<Intro />
-			<Catalog />
+			<Catalog type='movie' />
+			<Catalog type='tv' />
 		</>
 	);
 };

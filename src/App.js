@@ -22,7 +22,8 @@ function App() {
 					path='/favourites'
 					element={<SearchPage type={'favourites'} />}
 				/>
-				<Route path='/film/:id' element={<FilmPage />} />
+				<Route path='/movie/:id' element={<FilmPage type='movie' />} />
+				<Route path='/tv/:id' element={<FilmPage type='tv' />} />
 				<Route path='/exchanger' element={<ExchangerPage />} />
 				<Route path='*' element={<NotFound />} />
 			</Route>

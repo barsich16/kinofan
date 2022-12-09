@@ -1,9 +1,9 @@
 import { FilmDetails } from '../components/FilmDetails/FilmDetails';
 
-export const FilmPage = () => {
+export const FilmPage = ({ type }) => {
 	return (
 		<>
-			<FilmDetails />
+			<FilmDetails type={type} />
 		</>
 	);
 };

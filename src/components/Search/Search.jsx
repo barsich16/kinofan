@@ -19,40 +19,21 @@ export const Search = ({ isFetching, type }) => {
 		setFilterRatings,
 		setFilterYears,
 		setFilterLength,
+		setSort,
 		// setSortByRelease,
 	} = useActions();
 	const currentYear = getCurrentYear();
 	console.log('rerender');
 
 	const { data: genres, error } = useGetFilmsGenresQuery(type);
-
-	// const genres = [
-	// 	{ label: 'Всі жанри', value: '' },
-	// 	{ label: 'Сімейні', value: 'семейный' },
-	// 	{ label: 'Біографії', value: 'биография' },
-	// 	{ label: 'Бойовики', value: 'боевик' },
-	// 	{ label: 'Вестерни', value: 'вестерн' },
-	// 	{ label: 'Воєнні', value: 'военный' },
-	// 	{ label: 'Детективи', value: 'детектив' },
-	// 	{ label: 'Дитячі', value: 'детский' },
-	// 	{ label: 'Документальні', value: 'документальный' },
-	// 	{ label: 'Драми', value: 'драма' },
-	// 	{ label: 'Історичні', value: 'история' },
-	// 	{ label: 'Комедії', value: 'комедия' },
-	// 	{ label: 'Короткометражки', value: 'короткометражка' },
-	// 	{ label: 'Кримінал', value: 'криминал' },
-	// 	{ label: 'Мелодрами', value: 'мелодрама' },
-	// 	{ label: 'Музичні', value: 'музыка' },
-	// 	{ label: 'Мюзикли', value: 'мюзикл' },
-	// 	{ label: 'Новини', value: 'новости' },
-	// 	{ label: 'Пригоди', value: 'приключения' },
-	// 	{ label: 'Спортивні', value: 'спорт' },
-	// 	{ label: 'Триллери', value: 'триллер' },
-	// 	{ label: 'Жахи', value: 'ужасы' },
-	// 	{ label: 'Фантастика', value: 'фантастика' },
-	// 	{ label: 'Фільми-нуар', value: 'фильм-нуар' },
-	// 	{ label: 'Фентезі', value: 'фэнтези' },
-	// ];
+	const sorting = [
+		{ label: 'Популярністю спад', value: 'popularity.desc' },
+		{ label: 'Популярністю зрос', value: 'popularity.asc' },
+		{ label: 'Назвою спад', value: 'original_title.desc' },
+		{ label: 'Назвою зрос', value: 'original_title.asc' },
+		{ label: 'Рейтингом спад', value: 'vote_average.asc' },
+		{ label: 'Рейтингом зрос', value: 'vote_average.desc' },
+	];
 
 	useEffect(() => {
 		resetFilters();
@@ -66,6 +47,7 @@ export const Search = ({ isFetching, type }) => {
 					rating: [1, 10],
 					year: [1900, currentYear],
 					length: [0, 400],
+					sortBy: sorting[0],
 					// genres: genres[0],
 					// sort: '-1',
 				}}
@@ -83,8 +65,8 @@ export const Search = ({ isFetching, type }) => {
 
 				onSubmit={(values) => {
 					console.log(values);
-					const { sort, rating, year, genres = [], length } = values;
-
+					const { sortBy, rating, year, genres = [], length } = values;
+					console.log(sortBy);
 					// const ratingString = `${rating[0]}-${rating[1]}`;
 					// const yearString = `${year[0]}-${year[1]}`;
 					// const ratings = rating[0] !== rating[1] ? ratingString : rating[0];
@@ -96,7 +78,7 @@ export const Search = ({ isFetching, type }) => {
 					setFilterRatings(rating);
 					setFilterYears(year);
 					setFilterLength(length);
-					// setSortByRelease(sort);
+					setSort(sortBy.value);
 					setFilterGenre(genre);
 					console.log('Submit');
 					window.scrollTo({
@@ -152,7 +134,19 @@ export const Search = ({ isFetching, type }) => {
 						</Accordeon>
 
 						<Accordeon title={'Жанри'}>
-							<Select options={genres} name='genres' />
+							<Select
+								options={genres}
+								name='genres'
+								placeholder={'Оберіть жанри'}
+								isMulti
+							/>
+						</Accordeon>
+						<Accordeon title={'Сортувати'}>
+							<Select
+								options={sorting}
+								name='sortBy'
+								placeholder={'Сортувати результати за'}
+							/>
 						</Accordeon>
 
 						<Accordeon title={'Тривалість'}>

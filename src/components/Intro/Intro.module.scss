@@ -16,6 +16,12 @@
     max-width: 360px;
     line-height: 1.5;
     margin-bottom: 40px;
+    //white-space: nowrap;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
   }
 
   .button {
@@ -28,6 +34,7 @@
     .arrow {
       transition: margin linear .1s;
     }
+
     span {
       margin-right: 10px;
     }

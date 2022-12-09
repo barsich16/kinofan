@@ -1,7 +1,7 @@
 import {
 	setFilterRatings,
 	setFilterYears,
-	// setSortByRelease,
+	setSort,
 	setFilterGenre,
 	resetFilters,
 	setFilterLength,
@@ -14,7 +14,7 @@ export {
 	setFilterRatings,
 	setFilterYears,
 	setFilterLength,
-	// setSortByRelease,
+	setSort,
 	setFilterGenre,
 	setPage,
 	resetFilters,
