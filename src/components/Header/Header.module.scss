@@ -29,6 +29,16 @@
     .searchbar {
       display: flex;
       align-items: center;
+      position: relative;
+
+      .results {
+        position: absolute;
+        top: 50px;
+        left: 0;
+        right: 0;
+        width: 100%;
+
+      }
       .input {
         width: 370px;
         height: 40px;

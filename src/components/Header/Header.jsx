@@ -74,8 +74,10 @@ export const Header = () => {
 						type='text'
 					/>
 					{debouncedSearchTerm !== '' && (
-						<div></div>
-						<BookSearchResults searchTerm={debouncedSearchTerm} />
+						<div className={styles.results}>
+							<BookSearchResults searchTerm={debouncedSearchTerm} />
+						</div>
+
 					)}
 					<button className={`buttonBase ${styles.searchBtn}`}>
 						<SearchIcon width={20} height={20} className={styles.searchIcon} />

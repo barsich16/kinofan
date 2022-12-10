@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSearchMediaQuery } from '../../../redux/API/filmsAPI';
+import styles from './MediaSearchResults.module.css'
 // import { useSearchBooksQuery } from "./booksApi";
 
 export const BookSearchResults = ({ searchTerm }) => {
@@ -38,7 +39,7 @@ export const BookSearchResults = ({ searchTerm }) => {
 	return (
 		<ul>
 			{books.map((item) => (
-				<li key={item.id}>{item.vote_count}</li>
+				<li className={styles.item} key={item.id}>{item.vote_count}</li>
 			))}
 		</ul>
 	);
