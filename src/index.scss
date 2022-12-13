@@ -1,5 +1,19 @@
 body {
     font-family: 'Fira sans', sans-serif;
+    &::-webkit-scrollbar {
+        width: 7px;
+        opacity: .6;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #eee;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 5px;
+
+    }
 }
 
 //normalize

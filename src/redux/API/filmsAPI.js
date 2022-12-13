@@ -100,7 +100,7 @@ export const filmsApi = createApi({
 		}),
 		searchMedia: builder.query({
 			query: (term = '') =>
-				`/search/multi?api_key=${token}&language=${lang}&query=${term}`,
+				`/search/multi?api_key=${token}&language=${lang}&query=${term}&sort_by=popularity.desc`,
 		}),
 
 		// getFilmByFilters: builder.query({
