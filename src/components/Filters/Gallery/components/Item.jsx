@@ -19,7 +19,7 @@ export const Item = ({ data = {} }) => {
 	return (
 		<div className={styles.item}>
 			<div className={styles.left}>
-				<Link to={`/film/${id}`} className={styles.poster}>
+				<Link to={`/movie/${id}`} className={styles.poster}>
 					<img
 						src={
 							`https://image.tmdb.org/t/p/w300${poster_path}` ||

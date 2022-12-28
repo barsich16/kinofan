@@ -4,6 +4,7 @@ import { Button } from '../common/Button/Button';
 import { Carousel } from '../Swiper/Swiper';
 import { useParams } from 'react-router-dom';
 import { useGetFilmByIdQuery } from '../../redux/API/filmsAPI';
+import { Player } from '../Player/Player';
 
 //Film
 // {
@@ -299,7 +300,6 @@ export const FilmDetails = ({ type }) => {
 						</ul>
 					</div>
 				</div>
-
 				<div className='pc-tab'>
 					{/*<input defaultChecked={true} id='tab1' type='radio' name='pct' />*/}
 					{/*<input id='tab2' type='radio' name='pct' />*/}

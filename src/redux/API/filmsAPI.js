@@ -6,6 +6,25 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 const token = `3476d1bc83c6bc8c007c8a4a07d8968a`;
 const lang = 'uk';
 
+const setOnlyParams = (data) => {
+	return data.results.map(
+		({
+			first_air_date,
+			release_date,
+			name,
+			title,
+			original_name,
+			original_title,
+			...item
+		}) => ({
+			...item,
+			year: first_air_date?.slice(0, 4) || release_date?.slice(0, 4),
+			name: name || title,
+			original_name: original_name || original_title,
+		}),
+	);
+};
+
 // Define a service using a base URL and expected endpoints
 // export const filmsApi = createApi({
 // 	reducerPath: 'filmsApi',
@@ -57,7 +76,10 @@ export const filmsApi = createApi({
 	endpoints: (builder) => ({
 		getNewFilmsByType: builder.query({
 			query: ({ page = 1, type = 'movie' }) =>
-				`/${type}/popular?api_key=${token}&page=${page}&language=${lang}`,
+				`/discover/${type}?api_key=${token}&page=${page}&language=${lang}&region=RU`,
+			transformResponse: (data) => {
+				return setOnlyParams(data);
+			},
 		}),
 
 		getFilmById: builder.query({
@@ -101,6 +123,9 @@ export const filmsApi = createApi({
 		searchMedia: builder.query({
 			query: (term = '') =>
 				`/search/multi?api_key=${token}&language=${lang}&query=${term}&sort_by=popularity.desc`,
+			transformResponse: (data) => {
+				return setOnlyParams(data);
+			},
 		}),
 
 		// getFilmByFilters: builder.query({

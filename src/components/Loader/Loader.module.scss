@@ -1,0 +1,71 @@
+.main {
+  height: calc(100vh - 192px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.loader{
+  height: 100px;
+  width: 100px;
+  border-color: #5e35b1;
+  border-style: solid solid dotted dotted;
+  border-width: 5px;
+  border-radius: 50%;
+  animation: turn-left 2s infinite linear;
+  -webkit-animation: turn-left 2s infinite linear;
+
+  /* second circle */
+  &::before{
+    content: "";
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    border: 2px wheat;
+    border-style: solid dotted;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    position: absolute;
+    animation: turn-right 1s infinite linear;
+    -webkit-animation: turn-right 1s infinite linear;
+  }
+}
+
+@keyframes turn-left {
+  from{
+    transform:rotate(0) ;
+    -webkit-transform:rotate(0) ;
+    -moz-transform:rotate(0) ;
+    -ms-transform:rotate(0) ;
+    -o-transform:rotate(0) ;
+  }
+  to{
+    transform: rotate(1turn);
+    -webkit-transform: rotate(1turn);
+    -moz-transform: rotate(1turn);
+    -ms-transform: rotate(1turn);
+    -o-transform: rotate(1turn);
+  }
+
+}
+@keyframes turn-right {
+  from{
+    transform:rotate(0) ;
+    -webkit-transform:rotate(0) ;
+    -moz-transform:rotate(0) ;
+    -ms-transform:rotate(0) ;
+    -o-transform:rotate(0) ;
+  }
+  to{
+    transform: rotate(-1turn);
+    -webkit-transform: rotate(-1turn);
+    -moz-transform: rotate(-1turn);
+    -ms-transform: rotate(-1turn);
+    -o-transform: rotate(-1turn);
+  }
+
+}

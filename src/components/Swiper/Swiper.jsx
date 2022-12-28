@@ -11,7 +11,6 @@ import styles from './Swiper.module.scss';
 // import required modules
 
 import { Navigation } from 'swiper';
-import image from '../../assets/img/example.jpg';
 
 export const Carousel = () => {
 	return (
@@ -31,7 +30,7 @@ export const Carousel = () => {
 					<div className={styles.slide}>
 						<a href='#' className={styles.image_block}>
 							<div className={styles.image_wrapper}>
-								<img src={image} alt='Image' />
+								<img src={'https://place-hold.it/64x96'} alt='Image' />
 							</div>
 						</a>
 						<a>Бетмен</a>
@@ -39,7 +38,7 @@ export const Carousel = () => {
 				</SwiperSlide>
 				<SwiperSlide>
 					<div className={styles.image_block}>
-						<img src={image} alt='Image' />
+						<img src={'https://place-hold.it/64x96'} alt='Image' />
 					</div>
 				</SwiperSlide>
 				<SwiperSlide>

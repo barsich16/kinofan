@@ -24,7 +24,9 @@ export const RangeBlock = (props) => {
 					min={min}
 					max={value[1]}
 					type='number'
-					onChange={(newValue) => setValue([newValue, value[1]])}
+					// onChange={(event) => onChange(event.target.value)}
+					onChange={(event) => setValue([event.target.value, value[1]])}
+					// onChange={(newValue) => setValue([newValue, value[1]])}
 					name={name}
 				/>
 				<SearchInput
@@ -33,7 +35,8 @@ export const RangeBlock = (props) => {
 					max={max}
 					min={value[0]}
 					type='number'
-					onChange={(newValue) => setValue([value[0], newValue])}
+					// onChange={(newValue) => setValue([value[0], newValue])}
+					onChange={(event) => setValue([value[0], event.target.value])}
 					name={name}
 				/>
 			</div>

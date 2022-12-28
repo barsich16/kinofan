@@ -1,0 +1,35 @@
+.main {
+  padding: 100px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .inner {
+    width: 350px;
+
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 30px;
+    }
+
+    .input {
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      width: 100%;
+      text-align: center;
+    }
+
+    p {
+      font-weight: 300;
+      font-size: 14px;
+      margin-top: 20px;
+
+      a {
+        text-decoration: underline;
+      }
+    }
+  }
+}

@@ -1,17 +1,26 @@
 import styles from './Intro.module.scss';
-import bg from '../../assets/img/bg1.jpg';
 import { ReactComponent as Arrow } from '../../assets/img/arrow-right.svg';
-import { Link } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import {
 	useGetLatestMovieQuery,
 	useGetNewFilmsByTypeQuery,
 } from '../../redux/API/filmsAPI';
+import { useState } from 'react';
+import { Loader } from '../Loader/Loader';
 
-export const Intro = () => {
-	const { data, error, isFetching } = useGetNewFilmsByTypeQuery({});
+export const Intro = ({ data }) => {
+	// const { data, error, isFetching } = useGetNewFilmsByTypeQuery({});
 	console.log(data);
-	if (!data) return <h1>Завантаження...</h1>;
-	const { backdrop_path: bg, title, overview, id } = data.results[0];
+	const [isImageReady, setIsImageReady] = useState(false);
+	const { backdrop_path: bg, name, overview, id } = data[0];
+	const test = new Image();
+	test.src = `https://image.tmdb.org/t/p/original${bg}`;
+	test.onload = () => {
+		setIsImageReady(true);
+	};
+	console.log(test);
+
+	if (!isImageReady) return <Loader />;
 	// console.log(film);
 	return (
 		<div
@@ -24,9 +33,9 @@ export const Intro = () => {
 			}}
 		>
 			<div className={`wrapper ${styles.inner}`}>
-				<h1>{title}</h1>
+				<h1>{name}</h1>
 				<p>{overview}</p>
-				<Link to='/film/2' className='button'>
+				<Link to={`/movie/${id}`} className='button'>
 					<span>Детальніше</span> <Arrow className={styles.arrow} width={16} />
 				</Link>
 			</div>

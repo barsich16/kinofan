@@ -1,5 +1,5 @@
 .catalog {
-  padding: 50px 0;
+  padding: 30px 0 40px;
 
   .header {
     display: flex;
@@ -21,64 +21,6 @@
     row-gap: 50px;
     width: 100%;
     margin-bottom: 50px;
-    .item {
-      //max-width: 20%;
-      transition: all linear .2s ;
-
-      &:hover {
-        transform: translateY(-5px);
-      }
-      .ratio {
-        margin-bottom: 20px;
-
-        .image {
-          position: relative;
-          cursor: pointer;
-          display: block;
-          height: 100%;
-          border-radius: 5px;
-          overflow: hidden;
-
-          img {
-            display: block;
-            object-fit: cover;
-            width: 100%;
-            height: 100%;
-          }
-
-          span {
-            background-color: #00a340;
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            padding: 6px 8px;
-            border-radius: 5px;
-            color: white;
-          }
-        }
-      }
-
-
-
-      a {
-        font-weight: 500;
-        font-size: 18px;
-        color: #1f1f1f;
-        transition: color .3s;
-        text-overflow: ellipsis;
-        text-decoration: none;
-
-        &:hover {
-          color: #005382;
-        }
-      }
-
-      p {
-        margin-top: 10px;
-        color: rgba(31,31,31,.8);
-      }
-
-    }
   }
 
   .more {

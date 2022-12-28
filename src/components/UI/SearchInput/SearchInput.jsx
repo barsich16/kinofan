@@ -1,15 +1,10 @@
 import styles from './SearchInput.module.scss';
 
-export const SearchInput = ({ label, value, onChange, ...props }) => {
+export const SearchInput = ({ label, wrapperClassName = '', ...props }) => {
 	return (
-		<label className={styles.label}>
+		<label className={`${styles.label} ${wrapperClassName}`}>
 			<span>{label}</span>
-			<input
-				className={styles.input}
-				value={value}
-				onChange={(event) => onChange(event.target.value)}
-				{...props}
-			/>
+			<input className={styles.input} {...props} />
 		</label>
 	);
 };
