@@ -11,8 +11,9 @@ import { setPage } from '../../redux/slices/paginationSlice';
 import { useActions } from '../../hooks/useActions';
 import { useGetFilmsGenresQuery } from '../../redux/API/filmsAPI';
 import { genresNameToString } from '../../helpers/genresNameToString';
+import { GrClose } from 'react-icons/gr';
 
-export const Search = ({ isFetching, type }) => {
+export const Search = ({ isFetching, type, visible, setVisible }) => {
 	const {
 		resetFilters,
 		setFilterGenre,
@@ -40,84 +41,106 @@ export const Search = ({ isFetching, type }) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	return (
-		<div className={styles.filters}>
-			<Formik
-				initialValues={{
-					rating: [1, 10],
-					year: [1900, currentYear],
-					length: [0, 400],
-					sortBy: sorting[0],
-					// genres: genres[0],
-					// sort: '-1',
-				}}
-				// validate={(values) => {
-				// 	const errors = {};
-				// 	if (!values.email) {
-				// 		errors.email = 'Required';
-				// 	} else if (
-				// 		!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-				// 	) {
-				// 		errors.email = 'Invalid email address';
-				// 	}
-				// 	return errors;
-				// }}
+	useEffect(() => {
+		if (visible) {
+			document.body.style.overflow = 'hidden';
+		} else {
+			document.body.style.overflow = 'auto';
+		}
+	}, [visible]);
 
-				onSubmit={(values) => {
-					console.log(values);
-					const { sortBy, rating, year, genres = [], length } = values;
-					console.log(sortBy);
-					// const ratingString = `${rating[0]}-${rating[1]}`;
-					// const yearString = `${year[0]}-${year[1]}`;
-					// const ratings = rating[0] !== rating[1] ? ratingString : rating[0];
-					// const years = year[0] !== year[1] ? yearString : year[0];
-					const genresId = genres.map((genre) => genre.value);
-					const genre = genresId.length > 0 ? genresId.join(',') : '';
-					//
-					setPage(1);
-					setFilterRatings(rating);
-					setFilterYears(year);
-					setFilterLength(length);
-					setSort(sortBy.value);
-					setFilterGenre(genre);
-					console.log('Submit');
-					window.scrollTo({
-						top: 0,
-						left: 0,
-						behavior: 'smooth', //'smooth' для плавного прокруту
-					});
-				}}
-				// onReset={(values, formikHelpers) => {
-				// 	console.log(values, formikHelpers);
-				// }}
-			>
-				{({
-					values,
-					// errors,
-					// touched,
-					// handleChange,
-					// handleBlur,
-					handleSubmit,
-					handleReset,
-					isSubmitting,
-					/* and other goodies */
-				}) => (
-					<form onSubmit={handleSubmit}>
-						<div className={styles.choice}>
-							<span className={styles.state}>
-								Рейтинг: {values.rating[0]} - {values.rating[1]}
-							</span>
+	return (
+		// <div className={styles.filters}>
+		<Formik
+			initialValues={{
+				rating: [1, 10],
+				year: [1900, currentYear],
+				length: [0, 400],
+				sortBy: sorting[0],
+				// genres: genres[0],
+				// sort: '-1',
+			}}
+			// validate={(values) => {
+			// 	const errors = {};
+			// 	if (!values.email) {
+			// 		errors.email = 'Required';
+			// 	} else if (
+			// 		!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+			// 	) {
+			// 		errors.email = 'Invalid email address';
+			// 	}
+			// 	return errors;
+			// }}
+
+			onSubmit={(values) => {
+				console.log(values);
+				const { sortBy, rating, year, genres = [], length } = values;
+				console.log(sortBy);
+				// const ratingString = `${rating[0]}-${rating[1]}`;
+				// const yearString = `${year[0]}-${year[1]}`;
+				// const ratings = rating[0] !== rating[1] ? ratingString : rating[0];
+				// const years = year[0] !== year[1] ? yearString : year[0];
+				const genresId = genres.map((genre) => genre.value);
+				const genre = genresId.length > 0 ? genresId.join(',') : '';
+				//
+				setPage(1);
+				setFilterRatings(rating);
+				setFilterYears(year);
+				setFilterLength(length);
+				setSort(sortBy.value);
+				setFilterGenre(genre);
+				console.log('Submit');
+				window.scrollTo({
+					top: 0,
+					left: 0,
+					behavior: 'smooth', //'smooth' для плавного прокруту
+				});
+			}}
+			// onReset={(values, formikHelpers) => {
+			// 	console.log(values, formikHelpers);
+			// }}
+		>
+			{({
+				values,
+				// errors,
+				// touched,
+				// handleChange,
+				// handleBlur,
+				handleSubmit,
+				handleReset,
+				isSubmitting,
+				/* and other goodies */
+			}) => (
+				<form
+					onSubmit={handleSubmit}
+					className={`${styles.form} ${visible ? styles.visible : ''}`}
+				>
+					<div className={styles.header}>
+						<Button className={styles.reset} onClick={handleReset}>
+							<span>Скинути</span>
+						</Button>
+						<h2>Фільтри</h2>
+						<GrClose onClick={() => setVisible(false)} />
+					</div>
+					<div className={styles.settings}>
+						<div className={styles.choices}>
+							<div className={styles.choice}>
+								<span className={styles.state}>
+									Рейтинг: {values.rating[0]} - {values.rating[1]}
+								</span>
+							</div>
+							<div className={styles.choice}>
+								<span className={styles.state}>
+									Рік виробництва: {values.year[0]} - {values.year[1]}
+								</span>
+							</div>
+							<div className={styles.choice}>
+								<span className={styles.state}>
+									Жанри: {genresNameToString(values.genres)}
+								</span>
+							</div>
 						</div>
-						<div className={styles.choice}>
-							<span className={styles.state}>
-								Рік виробництва: {values.year[0]} - {values.year[1]}
-							</span>
-						</div>
-						<div className={styles.choice}>
-							<span className={styles.state}>
-								Жанри: {genresNameToString(values.genres)}
-							</span>
-						</div>
+
 						{/*<div className={styles.choice}>*/}
 						{/*	<span className={styles.state}>*/}
 						{/*		Рік випуску:{' '}*/}
@@ -167,25 +190,27 @@ export const Search = ({ isFetching, type }) => {
 						{/*		value='1'*/}
 						{/*	/>*/}
 						{/*</Accordeon>*/}
+					</div>
 
-						<div className={styles.btns}>
-							<Button
-								type='submit'
-								className={styles.btn}
-								disabled={isFetching}
-							>
-								<span>Застосувати</span>
-							</Button>
-							<Button
-								className={`${styles.btn} ${styles.btn_trans}`}
-								onClick={handleReset}
-							>
-								<span>Скинути</span>
-							</Button>
-						</div>
-					</form>
-				)}
-			</Formik>
-		</div>
+					<div className={styles.btns}>
+						<Button
+							type='submit'
+							className={styles.btn}
+							disabled={isFetching}
+							onClick={() => setVisible(false)}
+						>
+							<span>Застосувати</span>
+						</Button>
+						<Button
+							className={`${styles.btn} ${styles.btn_trans}`}
+							onClick={handleReset}
+						>
+							<span>Скинути</span>
+						</Button>
+					</div>
+				</form>
+			)}
+		</Formik>
+		// </div>
 	);
 };

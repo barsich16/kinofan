@@ -6,23 +6,26 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 const token = `3476d1bc83c6bc8c007c8a4a07d8968a`;
 const lang = 'uk';
 
+const formatParams = ({
+	first_air_date,
+	release_date,
+	name,
+	title,
+	original_name,
+	original_title,
+	vote_average,
+	...item
+}) => ({
+	...item,
+	year: first_air_date?.slice(0, 4) || release_date?.slice(0, 4),
+	vote_average: vote_average?.toFixed(1) || 0,
+	premier_date: first_air_date || release_date,
+	name: name || title,
+	original_name: original_name || original_title,
+});
+
 const setOnlyParams = (data) => {
-	return data.results.map(
-		({
-			first_air_date,
-			release_date,
-			name,
-			title,
-			original_name,
-			original_title,
-			...item
-		}) => ({
-			...item,
-			year: first_air_date?.slice(0, 4) || release_date?.slice(0, 4),
-			name: name || title,
-			original_name: original_name || original_title,
-		}),
-	);
+	return data.results.map((item) => formatParams(item));
 };
 
 // Define a service using a base URL and expected endpoints
@@ -85,9 +88,33 @@ export const filmsApi = createApi({
 		getFilmById: builder.query({
 			query: ({ id, type }) =>
 				`/${type}/${id}?api_key=${token}&language=${lang}`,
+			transformResponse: (data) => {
+				return formatParams(data);
+			},
 		}),
 		getLatestMovie: builder.query({
 			query: () => `/movie/latest?api_key=${token}&language=${lang}`,
+		}),
+		getActors: builder.query({
+			query: ({ id, type }) =>
+				`/${type}/${id}/credits?api_key=${token}&language=${lang}`,
+			transformResponse: (data) => {
+				return data.cast;
+			},
+		}),
+		getSimilarMedia: builder.query({
+			query: ({ page = 1, type = 'movie', id }) =>
+				`/${type}/${id}/similar?api_key=${token}&page=${page}&language=${lang}&language=${lang}`,
+			transformResponse: (data) => {
+				return setOnlyParams(data);
+			},
+		}),
+		getImages: builder.query({
+			query: ({ id, type }) =>
+				`/${type}/${id}/images?api_key=${token}&language=${lang}`,
+			transformResponse: (data) => {
+				return data.posters;
+			},
 		}),
 		getFilmsGenres: builder.query({
 			query: (type) => `/genre/${type}/list?api_key=${token}&language=${lang}`,
@@ -166,6 +193,9 @@ export const {
 	useGetFilmsQuery,
 	useGetLatestMovieQuery,
 	useSearchMediaQuery,
+	useGetActorsQuery,
+	useGetImagesQuery,
+	useGetSimilarMediaQuery,
 	// useGetCartoonsQuery,
 	// useGetFilmsQuery,
 	useGetFilmsGenresQuery,

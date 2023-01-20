@@ -1,5 +1,5 @@
 .catalog {
-  padding: 30px 0 40px;
+  margin: 30px 0 40px;
 
   .header {
     display: flex;
@@ -11,6 +11,11 @@
       font-size: 30px;
       font-weight: 500;
       color: #1f1f1f;
+
+      @media(max-width: 576px) {
+        font-size: 20px;
+        line-height: 30px;
+      }
     }
   }
 
@@ -21,6 +26,15 @@
     row-gap: 50px;
     width: 100%;
     margin-bottom: 50px;
+
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+      row-gap: 35px;
+    }
   }
 
   .more {

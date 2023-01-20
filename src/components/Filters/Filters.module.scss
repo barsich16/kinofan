@@ -7,6 +7,10 @@
     background-color: #fff;
     max-width: 1200px;
 
+    @media(max-width: 768px) {
+      padding: 40px 15px 60px;
+    }
+
     h1 {
       margin-bottom: 10px;
       font-size: 40px;
@@ -22,12 +26,42 @@
       max-width: 800px;
       color: #1f1f1f;
       font-weight: 300;
+
+      @media(max-width: 768px) {
+        margin: 0 0 20px;
+      }
+    }
+    
+    .openFilters {
+      border: 1px solid #005382;
+      color: #005382;
+      background-color: #fff;
+      padding: 11px 13px;
+      font-size: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+
+      @media (min-width: 1025px) {
+        display: none;
+      }
+
+      span {
+        margin-left: 5px;
+      }
     }
 
     .body {
       display: grid;
       grid-template-columns: 270px auto;
       column-gap: 60px;
+
+      @media (max-width: 1024px){
+        grid-template-columns: auto;
+      }
+
+      .filters {
+
+      }
     }
   }
 }

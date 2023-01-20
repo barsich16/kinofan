@@ -11,7 +11,7 @@ export const Card = ({ type, item }) => {
 		original_name,
 		year,
 	} = item;
-	console.log(item);
+	// console.log(item);
 	return (
 		// <div className={styles.item} key={id}>
 		<div className={styles.item}>

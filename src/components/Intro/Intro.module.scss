@@ -1,42 +1,92 @@
-.inner {
-  padding-top: 120px;
-  padding-bottom: 120px;
+.intro {
+  height: calc(100vh - 70px);
+  position: relative;
+  background-position: center 20%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  //background: center 20% / cover no-repeat;
 
-  h1 {
-    color: white;
-    font-size: 40px;
-    font-weight: 500;
-    margin-bottom: 40px;
+  @media(max-width: 768px) {
+    background-position: 68%;
   }
 
-  p {
-    font-size: 18px;
-    color: white;
-    font-weight: 300;
-    max-width: 360px;
-    line-height: 1.5;
-    margin-bottom: 40px;
-    //white-space: nowrap;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
+  &:before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color:rgba(0, 0, 0, .5);
   }
 
-  .button {
-    &:hover {
-      .arrow {
-        margin-left: 2px;
+  .overview {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    //left: 50%;
+    transform: translateY(-50%);
+    height: auto!important;
+  }
+
+  .inner {
+    position: relative;
+
+    h1 {
+      color: white;
+      font-size: 40px;
+      font-weight: 500;
+      margin-bottom: 40px;
+      max-width: 570px;
+
+      @media(max-width: 576px) {
+        font-size: 30px;
+        line-height: 38px;
+        margin-bottom: 20px;
+        max-width: 360px;
       }
     }
 
-    .arrow {
-      transition: margin linear .1s;
+    p {
+      font-size: 18px;
+      color: white;
+      font-weight: 300;
+      max-width: 360px;
+      line-height: 1.5;
+      margin-bottom: 40px;
+      //white-space: nowrap;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      text-overflow: ellipsis;
+
+      @media(max-width: 576px) {
+        font-size: 16px;
+        line-height: 23px;
+        margin-bottom: 25px;
+        padding-right: 30px;
+        max-width: 260px;
+      }
     }
 
-    span {
-      margin-right: 10px;
+    .button {
+      &:hover {
+        .arrow {
+          margin-left: 2px;
+        }
+      }
+
+      .arrow {
+        transition: margin linear .1s;
+      }
+
+      span {
+        margin-right: 10px;
+      }
     }
   }
 }

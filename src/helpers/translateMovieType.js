@@ -1,10 +1,8 @@
 export function translateMovieType(type) {
 	switch (type) {
-		case 'films':
+		case 'movie':
 			return { naz: 'фільми', rod: 'фільмів' };
-		case 'cartoons':
-			return { naz: 'мультфільми', rod: 'мультфільмів' };
-		case 'series':
+		case 'tv':
 			return { naz: 'серіали', rod: 'серіалів' };
 		default:
 			return { naz: 'фільми', rod: 'фільмів' };

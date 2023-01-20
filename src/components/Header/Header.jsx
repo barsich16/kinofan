@@ -3,6 +3,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { BurgerMenu } from '../UI/BurgerMenu/BurgerMenu';
 import { Searchbar } from '../UI/Searchbar/Searchbar';
 import styles from './Header.module.scss';
+import { FiLogIn, FiLogOut } from 'react-icons/fi';
 
 export const Header = () => {
 	const { isAuth, logout } = useAuth();
@@ -14,11 +15,13 @@ export const Header = () => {
 				<Searchbar />
 				{isAuth ? (
 					<span className={styles.login} onClick={logout}>
-						Вийти
+						<span>Вийти</span>
+						<FiLogOut />
 					</span>
 				) : (
 					<Link to='/login' className={styles.login}>
-						Увійти
+						<span>Увійти</span>
+						<FiLogIn />
 					</Link>
 				)}
 			</div>

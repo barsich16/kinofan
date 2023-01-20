@@ -8,48 +8,54 @@ import 'swiper/css/navigation';
 
 import styles from './Swiper.module.scss';
 
-// import required modules
-
 import { Navigation } from 'swiper';
 
-export const Carousel = () => {
+const breakpoints = {
+	320: {
+		slidesPerGroup: 2,
+		slidesPerView: 2,
+		spaceBetween: 10,
+	},
+	577: {
+		slidesPerGroup: 3,
+		slidesPerView: 3,
+		spaceBetween: 15,
+	},
+	769: {
+		slidesPerGroup: 3,
+		slidesPerView: 3,
+		spaceBetween: 30,
+	},
+	1025: {
+		slidesPerGroup: 4,
+		slidesPerView: 4,
+		spaceBetween: 30,
+	},
+	1200: {
+		slidesPerGroup: 5,
+		slidesPerView: 5,
+		spaceBetween: 30,
+	},
+};
+
+export const Carousel = ({ items }) => {
 	return (
 		<>
 			<Swiper
 				slidesPerView={5}
-				spaceBetween={30}
+				spaceBetween={40}
 				centeredSlides={false}
 				navigation={true}
+				breakpoints={breakpoints}
 				// pagination={{
 				// 	clickable: true,
 				// }}
 				modules={[Navigation]}
 				className={styles.swiper}
 			>
-				<SwiperSlide>
-					<div className={styles.slide}>
-						<a href='#' className={styles.image_block}>
-							<div className={styles.image_wrapper}>
-								<img src={'https://place-hold.it/64x96'} alt='Image' />
-							</div>
-						</a>
-						<a>Бетмен</a>
-					</div>
-				</SwiperSlide>
-				<SwiperSlide>
-					<div className={styles.image_block}>
-						<img src={'https://place-hold.it/64x96'} alt='Image' />
-					</div>
-				</SwiperSlide>
-				<SwiperSlide>
-					<div className={styles.image_block}>s</div>
-				</SwiperSlide>
-				<SwiperSlide>Slide 4</SwiperSlide>
-				<SwiperSlide>Slide 5</SwiperSlide>
-				<SwiperSlide>Slide 6</SwiperSlide>
-				<SwiperSlide>Slide 7</SwiperSlide>
-				<SwiperSlide>Slide 8</SwiperSlide>
-				<SwiperSlide>Slide 9</SwiperSlide>
+				{items.map((item, index) => (
+					<SwiperSlide key={index}>{item}</SwiperSlide>
+				))}
 			</Swiper>
 		</>
 	);

@@ -25,19 +25,19 @@ export const Intro = ({ data }) => {
 	return (
 		<div
 			style={{
-				background: `center 20% / cover no-repeat url(${
-					`https://image.tmdb.org/t/p/original${bg}` ||
-					'https://place-hold.it/64x96'
-				})`,
-				height: 'calc(100vh - 70px)',
+				backgroundImage: `url(https://image.tmdb.org/t/p/original${bg}`,
 			}}
+			className={styles.intro}
 		>
-			<div className={`wrapper ${styles.inner}`}>
-				<h1>{name}</h1>
-				<p>{overview}</p>
-				<Link to={`/movie/${id}`} className='button'>
-					<span>Детальніше</span> <Arrow className={styles.arrow} width={16} />
-				</Link>
+			<div className={`${styles.inner} wrapper `}>
+				<div className={styles.overview}>
+					<h1>{name}</h1>
+					{overview && <p>{overview}</p>}
+					<Link to={`/movie/${id}`} className='button'>
+						<span>Детальніше</span>{' '}
+						<Arrow className={styles.arrow} width={16} />
+					</Link>
+				</div>
 			</div>
 		</div>
 	);

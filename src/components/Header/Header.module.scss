@@ -13,7 +13,14 @@
     justify-content: space-between;
     position: relative;
     align-items: center;
-    padding: 15px 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+
+    @media (max-width: 767px){
+      padding-top: 22px;
+      padding-bottom: 22px;
+    }
+
 
 
 
@@ -22,6 +29,17 @@
       font-weight: 500;
       font-size: 18px;
       cursor: pointer;
+
+      @media (max-width: 767px){
+        span {
+          display: none;
+        }
+      }
+      @media (min-width: 768px){
+        svg {
+          display: none;
+        }
+      }
     }
   }
 }

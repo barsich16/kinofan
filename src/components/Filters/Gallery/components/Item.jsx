@@ -2,7 +2,8 @@ import styles from '../Gallery.module.scss';
 import { ReactComponent as FavouritesIcon } from '../../../../assets/img/favourites.svg';
 import { Link } from 'react-router-dom';
 
-export const Item = ({ data = {} }) => {
+export const Item = ({ data = {}, type }) => {
+	//TODO: засунути тип медіа в дату при отриманні з апішки, й брати тип звідти
 	const {
 		overview: desc,
 		id,
@@ -14,12 +15,13 @@ export const Item = ({ data = {} }) => {
 		// movieLength,
 		poster_path,
 	} = data;
+	console.log(data);
 	const name = filmName || seriesName;
 	const date = filmDate || seriesDate;
 	return (
 		<div className={styles.item}>
 			<div className={styles.left}>
-				<Link to={`/movie/${id}`} className={styles.poster}>
+				<Link to={`/${type}/${id}`} className={styles.poster}>
 					<img
 						src={
 							`https://image.tmdb.org/t/p/w300${poster_path}` ||
@@ -29,7 +31,7 @@ export const Item = ({ data = {} }) => {
 					/>
 				</Link>
 				<div className={styles.info}>
-					<Link to={`/film/${id}`} className={styles.link}>
+					<Link to={`/${type}/${id}`} className={styles.link}>
 						<h2 className={styles.name}>{name}</h2>
 					</Link>
 
@@ -37,7 +39,7 @@ export const Item = ({ data = {} }) => {
 					{/*${movieLength ? `, ${movieLength} мин.` : ''} */}
 					{/*`}</span>*/}
 					<span className={styles.year}>{date.slice(0, 4)}</span>
-					<Link to={`/film/${id}`} className={styles.link}>
+					<Link to={`/${type}/${id}`} className={styles.link}>
 						<p className={styles.desc}>{desc}</p>
 					</Link>
 				</div>
@@ -53,7 +55,7 @@ export const Item = ({ data = {} }) => {
 				</span>
 				<button className={`btn ${styles.btn}`}>
 					<FavouritesIcon width={15} height={15} className={styles.icon} />
-					Буду дивитися
+					<span>Буду дивитися</span>
 				</button>
 			</div>
 		</div>

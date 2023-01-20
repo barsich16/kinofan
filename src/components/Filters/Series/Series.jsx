@@ -3,10 +3,13 @@ import { useSelector } from 'react-redux';
 import { useGetSeriesQuery } from '../../../redux/API/filmsAPI';
 import { Gallery } from '../Gallery/Gallery';
 import { Search } from '../../Search/Search';
+import { useAutoScrollToTop } from '../../../hooks/useAutoScrollToTop';
 
 export const Series = () => {
 	const { filters } = useSelector((state) => state.filters);
 	const { page } = useSelector((state) => state.pagination);
+	useAutoScrollToTop();
+
 	const {
 		data = {},
 		isLoading,

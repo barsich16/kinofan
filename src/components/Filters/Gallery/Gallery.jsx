@@ -4,7 +4,7 @@ import { ReactComponent as DoubleArrowRight } from '../../../assets/img/double-a
 import { ReactComponent as ArrowRight } from '../../../assets/img/arrow-right-p.svg';
 import { useActions } from '../../../hooks/useActions';
 
-export const Gallery = ({ data = {}, isLoading, IsFetching, page }) => {
+export const Gallery = ({ data = {}, isLoading, IsFetching, page, type }) => {
 	const { setPage } = useActions();
 	if (isLoading) return 'Завантаження...';
 	const { results: items = [], total_pages = 1 } = data;
@@ -25,7 +25,7 @@ export const Gallery = ({ data = {}, isLoading, IsFetching, page }) => {
 		<div className={styles.main}>
 			<div className={styles.films}>
 				{items.map((item) => (
-					<Item key={item.id} data={item} />
+					<Item key={item.id} data={item} type={type} />
 				))}
 			</div>
 			<div className={styles.pagination}>

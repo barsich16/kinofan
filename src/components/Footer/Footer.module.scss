@@ -1,11 +1,25 @@
 .footer {
 	background-color: #141414;
 
+	@media(max-width: 767px) {
+		margin-bottom: 73px;
+	}
+
 	.inner {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		padding: 42px;
+		padding-top: 42px;
+		padding-bottom: 42px;
+		//padding: 42px 0;
+		@media(max-width: 767px) {
+			padding-top: 30px;
+			padding-bottom: 30px;
+		}
+		@media(max-width: 576px) {
+			padding-top: 25px;
+			padding-bottom: 25px;
+		}
 
 		.genres {
 			display: flex;

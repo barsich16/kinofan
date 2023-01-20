@@ -13,6 +13,12 @@
   color: #fff;
   transition: transform 50ms ease-in-out, background-color linear .2s;
 
+  @media(max-width: 576px) {
+    padding: 10px 12px;
+    font-size: 13px;
+    line-height: 13px;
+  }
+
   &:hover {
     background-color: #003f63;
   }
