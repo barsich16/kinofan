@@ -16,7 +16,9 @@ export const Films = () => {
 	const openFilters = () => {
 		setIsFiltersOpen(true);
 	};
+
 	useAutoScrollToTop();
+
 	const {
 		data = {},
 		isLoading,
@@ -25,7 +27,7 @@ export const Films = () => {
 		page,
 		filters,
 	});
-	console.log(data);
+
 	return (
 		<div className={styles.main}>
 			<div className={`wrapper ${styles.inner}`}>
@@ -35,21 +37,17 @@ export const Films = () => {
 					<GoSettings /> <span>Фільтри</span>
 				</Button>
 				<div className={styles.body}>
-					{/*<Search isFetching={isFetching} />*/}
 					<Search
 						type='movie'
 						visible={isFiltersOpen}
 						setVisible={setIsFiltersOpen}
 					/>
-					{!isFetching && !isLoading && (
-						<Gallery
-							isLoading={isLoading}
-							data={data}
-							isFetching={isFetching}
-							page={page}
-							type='movie'
-						/>
-					)}
+					<Gallery
+						isLoading={isLoading}
+						data={data}
+						isFetching={isFetching}
+						type='movie'
+					/>
 				</div>
 			</div>
 		</div>

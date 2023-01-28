@@ -1,40 +1,36 @@
 import { useState, useEffect, forwardRef } from 'react';
-import { useSearchMediaQuery } from '../../../redux/API/filmsAPI';
+import { useSearchMediaByNameQuery } from '../../../redux/API/filmsAPI';
 import styles from './MediaSearchResults.module.scss';
 import { Link } from 'react-router-dom';
+import Skeleton from 'react-loading-skeleton';
+import { FiImage, FiTv } from 'react-icons/fi';
+import { NoImage } from '../../common/NoImage/NoImage';
 
 export const MediaSearchResults = forwardRef(({ searchTerm = '' }, ref) => {
 	const [type, setType] = useState('movie');
 	const [filteredSearchTerm, setFilteredSearchTerm] = useState(
 		searchTerm === '',
 	);
-	console.log(searchTerm);
-	console.log(filteredSearchTerm);
-	const { data, error, isLoading, isFetching } =
-		useSearchMediaQuery(filteredSearchTerm);
+
+	const { data, error, isFetching } =
+		useSearchMediaByNameQuery(filteredSearchTerm);
 
 	const media = data ?? [];
-
 	const mediaByType = media.filter((item) => item.media_type === type);
 
 	useEffect(() => {
 		setFilteredSearchTerm(searchTerm);
 	}, [searchTerm]);
 
+	const skeletons = new Array(2)
+		.fill()
+		.map((_, index) => <SkeletonCard key={index} />);
+	const cards = mediaByType.map((item) => (
+		<Card item={item} type={type} key={item?.id} />
+	));
+
 	// if (error) {
 	// 	return <div className='text-hint'>Error while fetching books</div>;
-	// }
-	//
-	// if (isLoading) {
-	// 	return <div className='text-hint'>Loading books...</div>;
-	// }
-	//
-	// if (isFetching) {
-	// 	return <div className='text-hint'>Fetching books...</div>;
-	// }
-
-	// if (mediaByType.length === 0) {
-	// 	return <div className='text-hint'>No books found</div>;
 	// }
 
 	return (
@@ -60,33 +56,64 @@ export const MediaSearchResults = forwardRef(({ searchTerm = '' }, ref) => {
 				<label htmlFor='tv'>Серіали</label>
 			</div>
 			<ul className={styles.wrapper}>
-				{mediaByType.length === 0 && (
+				{isFetching ? (
+					skeletons
+				) : mediaByType.length === 0 ? (
 					<div className={styles.empty}>
 						По вашому запиту нічого не знайдено
 					</div>
+				) : error ? (
+					<div className={styles.empty}>Помилка при завантаженні даних</div>
+				) : (
+					cards
 				)}
-				{mediaByType.map(({ id, poster_path, overview, name, year }) => (
-					<li className={styles.main} key={id}>
-						<Link to={`/${type}/${id}`} className={styles.item}>
-							<div className={styles.img_block}>
-								<img
-									src={
-										`https://image.tmdb.org/t/p/w300${poster_path}` ||
-										'https://place-hold.it/64x96'
-									}
-									alt=''
-								/>
-							</div>
-							<div className={styles.info}>
-								<h2 className={styles.title}>
-									{name} <span className={styles.year}>{year}</span>
-								</h2>
-								<p className={styles.desc}>{overview}</p>
-							</div>
-						</Link>
-					</li>
-				))}
 			</ul>
 		</div>
 	);
 });
+
+const Card = ({ item, type }) => {
+	const { id, poster_path, overview, name, year } = item;
+	return (
+		<li className={styles.main}>
+			<Link to={`/${type}/${id}`} className={styles.item}>
+				<div className={styles.img_block}>
+					{poster_path ? (
+						<img src={`https://image.tmdb.org/t/p/w300${poster_path}`} alt='' />
+					) : (
+						<NoImage />
+					)}
+				</div>
+				<div className={styles.info}>
+					<h2 className={styles.title}>
+						{name} <span className={styles.year}>{year}</span>
+					</h2>
+					<p className={styles.desc}>{overview}</p>
+				</div>
+			</Link>
+		</li>
+	);
+};
+
+const SkeletonCard = () => {
+	return (
+		<li className={styles.main}>
+			<div className={styles.item}>
+				<div className={styles.img_block}>
+					<Skeleton height='100%' />
+				</div>
+				<div className={styles.info}>
+					<h2 className={styles.title}>
+						<Skeleton width='150px' />
+						<span className={styles.year}>
+							<Skeleton width='50px' />
+						</span>
+					</h2>
+					<p className={styles.desc}>
+						<Skeleton width='240px' />
+					</p>
+				</div>
+			</div>
+		</li>
+	);
+};

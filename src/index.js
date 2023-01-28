@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { store } from './redux/store';
 import React from 'react';
 import App from './App';
+import './styles/main.scss';
 import './index.scss';
 import './firebase';
 

@@ -4,10 +4,11 @@ import 'lightgallery/css/lg-zoom.css';
 import lgZoom from 'lightgallery/plugins/zoom';
 import styles from './Images.module.scss';
 import { useGetImagesQuery } from '../../../redux/API/filmsAPI';
+import { Loader } from '../../Loader/Loader';
 
 export const Images = ({ id, type }) => {
 	const { data, error, isFetching } = useGetImagesQuery({ id, type });
-	if (!data) return 'гружу...';
+	if (isFetching) return <Loader />;
 
 	return (
 		<LightGallery

@@ -1,28 +1,22 @@
-import { ReactComponent as Cross } from '../../../assets/img/cross.svg';
 import { MediaSearchResults } from '../../Header/MediaSearchResults/MediaSearchResult';
-import { ReactComponent as SearchIcon } from '../../../assets/img/search.svg';
 import React, { useEffect, useRef, useState } from 'react';
 import { FiX, FiSearch, FiChevronLeft } from 'react-icons/fi';
 import { useDebounce } from '../../../hooks/useDebounce';
 import styles from './Searchbar.module.scss';
-import { useLocation } from 'react-router-dom';
 import { useChangePathName } from '../../../hooks/useChangePathName';
 
 export const Searchbar = () => {
 	const searchResult = useRef(null);
 	const searchInput = useRef(null);
 	const openSearchButton = useRef(null);
-	const { pathname } = useLocation();
 
 	const [isSearchResultOpen, setIsSearchResultOpen] = useState(true);
 	const [searchTerm, setSearchTerm] = useState('');
-	useChangePathName(() => setSearchTerm(''));
-	// useEffect(() => {
-	// 	setSearchTerm('');
-	// }, [pathname]);
-	const debouncedSearchTerm = useDebounce(searchTerm, 500);
-
 	const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+	useChangePathName(() => setSearchTerm(''));
+
+	const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
 	const closeWindowResult = () => {
 		setIsSearchResultOpen(false);
@@ -34,7 +28,6 @@ export const Searchbar = () => {
 		setIsSearchResultOpen(true);
 	};
 
-	//TODO: добавить в масив і перевіряти кожен реф
 	useEffect(() => {
 		//закрити вікно пош.рядку при кліку на іншу область
 		const onClick = (e) => {
@@ -69,13 +62,12 @@ export const Searchbar = () => {
 						ref={searchInput}
 					></input>
 					<button
-						// style={{ display: `${searchTerm === '' ? 'none' : 'block'}` }}
 						onClick={() => setSearchTerm('')}
 						className={`${styles.clear} ${
 							searchTerm === '' ? '' : styles.active
 						}`}
 					>
-						<Cross width={20} height={20} />
+						<FiX />
 					</button>
 					<button
 						className={`buttonBase ${styles.backBtn}`}
@@ -92,7 +84,7 @@ export const Searchbar = () => {
 				</div>
 
 				<button className={`buttonBase ${styles.searchBtn}`}>
-					<SearchIcon width={20} height={20} className={styles.searchIcon} />
+					<FiSearch className={styles.searchIcon} />
 				</button>
 			</div>
 			<button
@@ -100,7 +92,7 @@ export const Searchbar = () => {
 				onClick={() => openSearch()}
 				ref={openSearchButton}
 			>
-				<SearchIcon width={20} height={20} className={styles.searchIcon} />
+				<FiSearch className={styles.searchIcon} />
 			</button>
 		</>
 	);

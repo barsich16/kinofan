@@ -7,6 +7,7 @@ import { FiLogIn, FiLogOut } from 'react-icons/fi';
 
 export const Header = () => {
 	const { isAuth, logout } = useAuth();
+	console.log(isAuth);
 
 	return (
 		<div className={styles.header}>

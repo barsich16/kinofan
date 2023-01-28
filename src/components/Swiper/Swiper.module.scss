@@ -17,17 +17,16 @@
       width: fit-content;
       position: relative;
 
-
       .image_wrapper {
         border-radius: 10px;
         overflow: hidden;
-        background-color: #000;
+        background-color: var(--color-black);
         margin-bottom: 10px;
 
         img {
           max-width: 300px;
           transition: all ease .3s ;
-          background-color: #000;
+          background-color: var(--color-black);
         }
       }
     }
@@ -36,7 +35,7 @@
       font-weight: 500;
       font-size: 18px;
       line-height: 24px;
-      color: #1f1f1f;
+      color: var(--color-light-dark);
       transition: color .3s;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -44,7 +43,7 @@
       cursor: pointer;
 
       &:hover {
-        color: #005382;
+        color: var(--color-primary);
       }
     }
   }

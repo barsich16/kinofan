@@ -3,13 +3,8 @@
 
   .inputs {
     display: grid;
-    //height: 100vh;
     grid-template-columns: repeat(2, 1fr);
-
-    /* ! */
     column-gap:  10px;
-    //display: flex;
-    //align-items: flex-end;
     margin-bottom: 25px;
   }
 }

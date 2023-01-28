@@ -1,24 +1,21 @@
+import { resetFilters, setFilters } from './slices/filtersSlice';
+import { setPage, resetPage } from './slices/paginationSlice';
 import {
-	setFilterRatings,
-	setFilterYears,
-	setSort,
-	setFilterGenre,
-	resetFilters,
-	setFilterLength,
-} from './slices/filtersSlice';
-// import { toggleFilters, toggleMenu } from '@/store/reducers/toggle.slice';
-import { setPage } from './slices/paginationSlice';
-import { setUser, removeUser } from './slices/userSlice';
-// import { setSearch, setVisible } from '@/store/reducers/search.slice';
+	setUser,
+	removeUser,
+	loginThunk,
+	registerThunk,
+	logoutThunk,
+} from './slices/userSlice';
 
 export {
-	setFilterRatings,
-	setFilterYears,
-	setFilterLength,
-	setSort,
-	setFilterGenre,
+	setFilters,
 	setPage,
+	resetPage,
 	resetFilters,
 	setUser,
 	removeUser,
+	loginThunk,
+	logoutThunk,
+	registerThunk,
 };

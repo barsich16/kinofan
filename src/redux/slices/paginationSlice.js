@@ -9,12 +9,13 @@ export const paginationSlice = createSlice({
 	initialState,
 	reducers: {
 		setPage: (state, action) => {
-			console.log(state);
 			state.page = action.payload;
+		},
+		resetPage: (state, action) => {
+			state.page = initialState.page;
 		},
 	},
 });
 
-export const { setPage } = paginationSlice.actions;
-
-export const paginationReducer = paginationSlice.reducer;
+export const { setPage, resetPage } = paginationSlice.actions;
+export default paginationSlice.reducer;

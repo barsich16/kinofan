@@ -1,21 +1,11 @@
-.image {
-  //display: block;
-  ////height: 100%;
-  //border-radius: 5px;
-  //overflow: hidden;
-  //width: 200px;
-  //position: relative;
-  //aspect-ratio: 2 / 3;
-  //background-color: #b2b2b2;
-
+.img_block {
   position: relative;
-  cursor: pointer;
   display: block;
   height: 100%;
   border-radius: 5px;
   overflow: hidden;
 
-  .avatar {
+  .image {
     display: block;
     object-fit: cover;
     width: 100%;
@@ -34,14 +24,11 @@
   font-size: 16px;
   line-height: 20px;
   font-weight: 500;
-  color: #141414;
+  color: var(--color-dark);
   margin-top: 10px;
 }
 
 .character {
   font-size: 14px;
-  //line-height: 20px;
   font-weight: 500;
-  //color: #141414;
-  //margin-top: 10px;
 }

@@ -2,12 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 import { getCurrentYear } from '../../helpers/getCurrentYear';
 
 const initialState = {
-	// filters: {
-	// 	year: `1960-${getCurrentYear()}`,
-	// 	rating: '1-10',
-	// 	sortByRelease: '-1',
-	// 	genre: '',
-	// },
 	filters: {
 		minYear: '1900-01-01',
 		maxYear: `${getCurrentYear()}-12-31`,
@@ -17,10 +11,6 @@ const initialState = {
 		maxLength: 400,
 		genres: '',
 		sortBy: 'popularity.desc',
-		// year: `1960-${getCurrentYear()}`,
-		// rating: '1-10',
-		// sortByRelease: '-1',
-		// genre: '',
 	},
 };
 
@@ -28,28 +18,20 @@ export const filtersSlice = createSlice({
 	name: 'filters',
 	initialState,
 	reducers: {
-		setFilterYears: (state, action) => {
-			// console.log(state);
-			state.filters.minYear = `${action.payload[0]}-01-01`;
-			state.filters.maxYear = `${action.payload[1]}-12-31`;
-		},
-		setFilterRatings: (state, action) => {
-			state.filters.minRating = action.payload[0];
-			state.filters.maxRating = action.payload[1];
-		},
-		setFilterLength: (state, action) => {
-			console.log(action);
-			state.filters.minLength = action.payload[0];
-			state.filters.maxLength = action.payload[1];
-		},
-		setSort: (state, action) => {
-			state.filters.sortBy = action.payload;
-		},
-		// setSortByRelease: (state, action) => {
-		// 	state.filters.sortByRelease = action.payload;
-		// },
-		setFilterGenre: (state, action) => {
-			state.filters.genres = action.payload;
+		setFilters: (state, action) => {
+			const { rating, year, length, sortBy, genre } = action.payload;
+
+			state.filters.minRating = rating[0];
+			state.filters.maxRating = rating[1];
+
+			state.filters.minYear = `${year[0]}-01-01`;
+			state.filters.maxYear = `${year[1]}-12-31`;
+
+			state.filters.minLength = length[0];
+			state.filters.maxLength = length[1];
+
+			state.filters.sortBy = sortBy;
+			state.filters.genres = genre;
 		},
 		resetFilters: (state) => {
 			state.filters = initialState.filters;
@@ -57,13 +39,6 @@ export const filtersSlice = createSlice({
 	},
 });
 
-export const {
-	setFilterYears,
-	setFilterRatings,
-	setFilterLength,
-	setSort,
-	setFilterGenre,
-	resetFilters,
-} = filtersSlice.actions;
+export const { setFilters, resetFilters } = filtersSlice.actions;
 
 export default filtersSlice.reducer;

@@ -1,5 +1,6 @@
 body {
     font-family: 'Fira sans', sans-serif;
+    margin: 0;
     &::-webkit-scrollbar {
         width: 7px;
         opacity: .6;
@@ -21,10 +22,6 @@ body {
 html {
     line-height: 1.15; /* 1 */
     -webkit-text-size-adjust: 100%; /* 2 */
-}
-
-body {
-    margin: 0;
 }
 
 /**
@@ -116,18 +113,6 @@ ul {
 li {
     list-style-type: none;
     /* Убираем маркеры */
-}
-
-/**
- * 1. Correct the inheritance and scaling of font size in all browsers.
- * 2. Correct the odd `em` font sizing in all browsers.
- */
-
-code,
-kbd,
-samp {
-    font-family: monospace, monospace; /* 1 */
-    font-size: 1em; /* 2 */
 }
 
 /**
@@ -289,37 +274,10 @@ template {
 }
 
 .wrapper {
-        margin: 0 auto;
-        max-width: 1200px;
-        padding: 0 15px;
-    }
-@media (max-width: 1200px) {
-    .wrapper {
-        //padding: 0 calc(50% - 600px);
-    }
-}
-@media (max-width: 991px){
-    .wrapper {
-        //padding: 0 calc(50% - 350px);
-    }
-}
-@media (max-width: 767px){
-    //.wrapper {
-    //    padding: 0 calc(50% - 340px);
-    //}
-}
-
-//767
-
-
-.wrapper {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 0 15px;
     height: 100%;
-    //margin: 0px auto;
-    //padding-left: 15px;
-    //padding-right: 15px;
-    //max-width: 1260px;
-
-    //width: calc(100vw - 140px);
 }
 
 .input {
@@ -333,8 +291,6 @@ template {
     font-size: 14px;
 }
 
-
-
 .buttonBase {
     border: none;
     padding: 0;
@@ -342,9 +298,8 @@ template {
     cursor: pointer;
 }
 
-
 .button {
-    background-color: #005382;
+    background-color: var(--color-primary);
     padding: 13px 15px;
     border: none;
     border-radius: 5px;
@@ -354,7 +309,7 @@ template {
     display: inline-flex;
     align-items: center;
     font-weight: 500;
-    color: #fff;
+    color: var(--color-white);
     transition: transform 50ms ease-in-out, background-color linear .2s;
 
     @media(max-width: 576px) {
@@ -364,7 +319,7 @@ template {
     }
 
     &:hover {
-         background-color: #003f63;
+         background-color: var(--color-dark-primary);
 
         svg {
             margin-left: 2px;
@@ -398,23 +353,13 @@ footer {
 .swiper {
     width: 100%;
     height: 100%;
-
-    //.swiper-button-next, .swiper-button-prev {
-    //    position: absolute;
-    //    top: 0;
-    //}
-
 }
 
 .swiper-slide {
     font-size: 18px;
-    background: #fff;
-
-    /* Center slide text vertically */
+    background: var(--color-white);
     display: -webkit-box;
     display: -ms-flexbox;
-    //display: -webkit-flex;
-    //display: flex;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     -webkit-justify-content: center;

@@ -1,18 +1,18 @@
 import styles from './BurgerMenu.module.scss';
 import { Link, useLocation } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../../assets/img/logo.svg';
-import React, { useEffect, useRef, useState } from 'react';
-import { FiFilm, FiHome, FiTv, FiHeart } from 'react-icons/fi';
-import { BiMovie } from 'react-icons/bi';
+import React, { useRef, useState } from 'react';
+import { FiFilm, FiHome, FiTv } from 'react-icons/fi';
 import { useOutsideClick } from '../../../hooks/useOutsideClick';
 import { useChangePathName } from '../../../hooks/useChangePathName';
 
 export const BurgerMenu = () => {
 	const menuItem = useRef(null);
 	const hamburgerRef = useRef(null);
-	const { pathname } = useLocation();
 
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+	const { pathname } = useLocation();
 
 	const closeMenu = () => {
 		setIsMenuOpen(false);
@@ -23,7 +23,7 @@ export const BurgerMenu = () => {
 	useChangePathName(closeMenu);
 
 	const items = [
-		{ icon: <FiHome />, href: '/', text: 'Головна' },
+		{ icon: <FiHome className={styles.icon} />, href: '/', text: 'Головна' },
 		{ icon: <FiFilm />, href: '/movie', text: 'Фільми' },
 		{ icon: <FiTv />, href: '/tv', text: 'Серіали' },
 	];
@@ -63,20 +63,6 @@ export const BurgerMenu = () => {
 							</Link>
 						);
 					})}
-					{/*<Link to={'/'} className={styles.item} onClick={hideMenu}>*/}
-					{/*	<FiHome />*/}
-					{/*	<span className={styles.text}>Головна</span>*/}
-					{/*</Link>*/}
-
-					{/*<Link to={'/movie'} className={styles.item} onClick={hideMenu}>*/}
-					{/*	<FiFilm />*/}
-					{/*	<span className={styles.text}>Фільми</span>*/}
-					{/*</Link>*/}
-
-					{/*<Link to={'/tv'} className={styles.item} onClick={hideMenu}>*/}
-					{/*	<FiTv />*/}
-					{/*	<span className={styles.text}>Серіали</span>*/}
-					{/*</Link>*/}
 				</ul>
 			</div>
 			<Link to='/' className={styles.logo}>

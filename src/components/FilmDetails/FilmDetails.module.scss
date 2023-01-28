@@ -1,11 +1,10 @@
 .details {
   height: 100%;
-  background-color: #f4f4f4;
-  //padding: 0 40px;
+  background-color: var(--color-gray);
 
   .inner {
     padding: 40px;
-    background-color: #fff;
+    background-color: var(--color-white);
     max-width: 1200px;
     margin: 0 auto;
 
@@ -51,11 +50,15 @@
           overflow: hidden;
           object-fit: cover;
           aspect-ratio: 2/3;
-          background-color: #141414;
+          background-color: var(--color-dark);
+
+          &.skeleton {
+            background-color: #ebebeb;
+          }
         }
 
-        span {
-          background-color: #00a340;
+        .rating {
+          background-color: var(--color-green);
           position: absolute;
           top: 10px;
           left: 10px;
@@ -75,7 +78,7 @@
           line-height: 48px;
           max-width: 650px;
           margin: 0 0 20px;
-          color: #1f1f1f;
+          color: var(--color-light-dark);
 
           @media (max-width: 768px) {
             text-align: center;
@@ -132,12 +135,12 @@
             }
 
             &__blue {
-              background-color: #005382;
+              background-color: var(--color-primary);
               margin-right: 15px;
             }
             &__gray {
-              background-color: #f2f2f2;
-              color: #141414;
+              background-color: var(--color-gray);
+              color: var(--color-dark);
             }
           }
 

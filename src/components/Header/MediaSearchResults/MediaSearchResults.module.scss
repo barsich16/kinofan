@@ -32,7 +32,7 @@
             font-size: 13px;
             cursor: pointer;
             text-align: center;
-            background-color: #1f1f1f;
+            background-color: var(--color-light-dark);
         }
 
         input[type="radio"]:checked+label {
@@ -40,7 +40,7 @@
         }
 
         label:hover {
-            background-color: #1f1f1f;
+            background-color: var(--color-light-dark);
         }
 
         .type {
@@ -50,7 +50,7 @@
             font-size: 13px;
             color: white;
             font-weight: 500;
-            background-color: #1f1f1f;
+            background-color: var(--color-light-dark);
 
             &:first-child {
                 background-color: black;
@@ -59,7 +59,7 @@
     }
 
     .all_results {
-        background-color: #141414;
+        background-color: var(--color-dark);
         display: block;
         padding: 15px;
         color: white;
@@ -70,7 +70,6 @@
             background-color: black;
         }
     }
-
 }
 
 .wrapper {
@@ -94,14 +93,15 @@
 
     }
 
-
-
     .empty {
         padding: 50px;
         line-height: 1.4;
         text-align: center;
         color: white;
         font-size: 14px;
+    }
+    .loader {
+        height: auto;
     }
     .main {
         height: 100px;
@@ -120,6 +120,7 @@
                 margin-right: 10px;
                 border-radius: 5px;
                 overflow: hidden;
+                position: relative;
 
                 img {
                     width: 100%;
@@ -137,12 +138,12 @@
                     font-weight: 500;
                     font-size: 16px;
                     transition: color .3s;
-                    color: #efeaea;
+                    color: var(--color-gray);
                     margin: 0 0 5px;
                 }
 
                 .year {
-                    color: #141414;
+                    color: var(--color-dark);
                     font-weight: 400;
                     font-size: 14px;
                     margin-bottom: 5px;
@@ -151,7 +152,6 @@
                 .desc {
                     font-size: 14px;
                     color: rgba(0, 0, 0, 0.58);
-                    //white-space: nowrap;
                     overflow: hidden;
                     display: -webkit-box;
                     -webkit-line-clamp: 2;

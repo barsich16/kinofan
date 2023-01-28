@@ -1,6 +1,5 @@
 .header {
-  //background-color: #1f1f1f;
-  background-color: #141414;
+  background-color: var(--color-dark);
   position: sticky;
   top: 0;
   left: 0;
@@ -8,7 +7,6 @@
   z-index: 1000;
 
   .inner {
-    //background-color: blue;
     display: flex;
     justify-content: space-between;
     position: relative;
@@ -21,9 +19,6 @@
       padding-bottom: 22px;
     }
 
-
-
-
     .login {
       color: white;
       font-weight: 500;
@@ -35,6 +30,7 @@
           display: none;
         }
       }
+
       @media (min-width: 768px){
         svg {
           display: none;

@@ -3,15 +3,9 @@ import { SliderThumb } from './components/SliderThumb/SliderThumb';
 import { useRef } from 'react';
 import { SliderTrack } from './components/SliderTrack/SliderTrack';
 
-// value={values.rating}
-// step={1}
-// min={1}
-// max={10}
-// onChange={handleChange}
-// name='rating'
-
 export const SliderRange = ({ value, setValue, step, min, max, name }) => {
 	const initialValueRef = useRef(value);
+
 	const handleRenderThumb = ({ props, value, index }) => {
 		return (
 			<SliderThumb
@@ -31,7 +25,7 @@ export const SliderRange = ({ value, setValue, step, min, max, name }) => {
 		);
 	};
 
-	const test = (e) => {
+	const changeValue = (e) => {
 		setValue(e);
 	};
 
@@ -41,7 +35,7 @@ export const SliderRange = ({ value, setValue, step, min, max, name }) => {
 			min={min}
 			max={max}
 			values={value}
-			onChange={(e) => test(e)}
+			onChange={(e) => changeValue(e)}
 			name={name}
 			renderThumb={handleRenderThumb}
 			renderTrack={handleRenderTrack}

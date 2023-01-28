@@ -6,7 +6,6 @@
   .tab {
     width: 100%;
     color: black;
-    //overflow: hidden;
 
     .input {
       position: absolute;
@@ -21,6 +20,7 @@
       cursor: pointer;
       font-weight: 600;
       font-size: 15px;
+
       /* Icon */
       &::after {
         content: "\276F";
@@ -28,32 +28,33 @@
         height: 1em;
         text-align: center;
         transition: all .35s;
-        transform: rotate(90deg);
+        transform: rotate(270deg);
       }
     }
 
     .content {
-      max-height: 0;
-      padding: 0;
+      max-height: 100vh;
+      padding: 15px 0;
       transition: all .2s;
 
       & * {
-        visibility: hidden;
+        visibility: visible;
       }
     }
   }
 }
+
 .input:checked {
   + .label::after {
-    transform: rotate(270deg);
+    transform: rotate(90deg);
   }
 
   ~ .content {
-    max-height: 100vh;
-    padding: 15px 0;
+    max-height: 0;
+    padding: 0;
 
     & * {
-      visibility: visible;
+      visibility: hidden;
     }
   }
 }

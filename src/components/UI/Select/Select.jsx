@@ -34,16 +34,16 @@ export const Select = ({ options, name, placeholder, isMulti = false }) => {
 			...provided,
 			'&:active': { backgroundColor: 'rgba(0,0,0, 0.1)' },
 			backgroundColor: state.isSelected
-				? '#005382 !important;'
+				? 'var(--color-primary) !important;'
 				: state.isFocused
 				? '#f2f2f2'
-				: '#fff',
-			color: state.isSelected ? '#fff' : '#000',
+				: 'var(--color-white)',
+			color: state.isSelected ? 'var(--color-white)' : 'var(--color-black)',
 			padding: '10px 15px',
 		}),
 		noOptionsMessage: (base) => ({
 			...base,
-			color: '#000',
+			color: 'var(--color-black)',
 		}),
 	};
 

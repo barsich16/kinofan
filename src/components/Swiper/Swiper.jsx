@@ -39,6 +39,7 @@ const breakpoints = {
 };
 
 export const Carousel = ({ items }) => {
+	console.log(items);
 	return (
 		<>
 			<Swiper
@@ -47,9 +48,6 @@ export const Carousel = ({ items }) => {
 				centeredSlides={false}
 				navigation={true}
 				breakpoints={breakpoints}
-				// pagination={{
-				// 	clickable: true,
-				// }}
 				modules={[Navigation]}
 				className={styles.swiper}
 			>

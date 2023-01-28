@@ -7,11 +7,10 @@ export const SliderTrack = ({ children, values, props, min, max }) => {
 		() =>
 			getTrackBackground({
 				values,
-				colors: ['rgba(0,0,0,.2)', '#005382', 'rgba(0,0,0,.2)'],
+				colors: ['rgba(0,0,0,.2)', 'var(--color-primary)', 'rgba(0,0,0,.2)'],
 				min: min,
 				max: max,
 			}),
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[values],
 	);
 

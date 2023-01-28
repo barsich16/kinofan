@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useGetNewFilmsByTypeQuery } from '../../redux/API/filmsAPI';
 import { Link } from 'react-router-dom';
 import { Card } from './Item/Card';
-import { SkeletonCard } from './Item/SkeletonCard';
+import { SkeletonCards } from './Item/SkeletonCards';
 
 export const Catalog = ({ type = 'movie' }) => {
 	const typeUA = type === 'movie' ? 'фільми' : 'серіали';
@@ -12,8 +12,8 @@ export const Catalog = ({ type = 'movie' }) => {
 	const [page, setPage] = useState(1);
 	const [items, setItems] = useState([]);
 	const [countForView, setCountForView] = useState(10);
+
 	const { data, error, isFetching } = useGetNewFilmsByTypeQuery({ page, type });
-	console.log(data);
 
 	useEffect(() => {
 		if (data) {
@@ -37,24 +37,20 @@ export const Catalog = ({ type = 'movie' }) => {
 			<div className='wrapper'>
 				<div className={styles.header}>
 					<h2>Популярні {typeUA}</h2>
-
 					<Button>
 						<Link to={`/${type}`}>Дивитись усі</Link>
 					</Button>
 				</div>
 				<div className={styles.items}>
-					{/*{new Array(5).fill().map(() => (*/}
-					{/*	<SkeletonCard />*/}
-					{/*))}*/}
-					{items.length === 0
-						? new Array(10)
-								.fill()
-								.map((_, index) => <SkeletonCard key={index} />)
-						: items.map((item, index) => {
-								if (index < countForView) {
-									return <Card type={type} item={item} key={item.id} />;
-								}
-						  })}
+					{items.length === 0 ? (
+						<SkeletonCards number={10} />
+					) : (
+						items.map((item, index) => {
+							if (index < countForView) {
+								return <Card type={type} item={item} key={item.id} />;
+							}
+						})
+					)}
 				</div>
 
 				<Button className={styles.more} onClick={increaseLimit}>

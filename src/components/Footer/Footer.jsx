@@ -7,7 +7,7 @@ export const Footer = () => {
 	return (
 		<div className={styles.footer}>
 			<div className={`wrapper ${styles.inner}`}>
-				<Logo className={styles.logo} />
+				<Logo />
 				<div className={styles.genres}>
 					<Link to={'/movie'}>Фільми</Link>
 					<Link to={'/tv'}>Серіали</Link>

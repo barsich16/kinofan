@@ -4,10 +4,19 @@ import { useGetSeriesQuery } from '../../../redux/API/filmsAPI';
 import { Gallery } from '../Gallery/Gallery';
 import { Search } from '../../Search/Search';
 import { useAutoScrollToTop } from '../../../hooks/useAutoScrollToTop';
+import { useState } from 'react';
+import { GoSettings } from 'react-icons/go';
+import { Button } from '../../common/Button/Button';
 
 export const Series = () => {
 	const { filters } = useSelector((state) => state.filters);
 	const { page } = useSelector((state) => state.pagination);
+	const [isFiltersOpen, setIsFiltersOpen] = useState(false);
+
+	const openFilters = () => {
+		setIsFiltersOpen(true);
+	};
+
 	useAutoScrollToTop();
 
 	const {
@@ -19,27 +28,26 @@ export const Series = () => {
 		filters,
 	});
 	console.log(data);
-	// console.log(data);
-	// if (isLoading) return 'Завантаження...';
-	// if (!data) return 'VPN Error!';
 	return (
 		<div className={styles.main}>
 			<div className={`wrapper ${styles.inner}`}>
 				<h1>Всі Серіали</h1>
 				<p className={styles.subtitle}>Підбірка серіалів всього світу</p>
-
+				<Button className={styles.openFilters} onClick={openFilters}>
+					<GoSettings /> <span>Фільтри</span>
+				</Button>
 				<div className={styles.body}>
-					<div className={styles.filters}>
-						<Search type='tv' />
-					</div>
-					{!isFetching && !isLoading && (
-						<Gallery
-							isLoading={isLoading}
-							data={data}
-							isFetching={isFetching}
-							page={page}
-						/>
-					)}
+					<Search
+						type='tv'
+						visible={isFiltersOpen}
+						setVisible={setIsFiltersOpen}
+					/>
+					<Gallery
+						isLoading={isLoading}
+						data={data}
+						isFetching={isFetching}
+						type='tv'
+					/>
 				</div>
 			</div>
 		</div>

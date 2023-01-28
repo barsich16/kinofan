@@ -1,6 +1,7 @@
 import styles from './Card.module.scss';
 import { Link } from 'react-router-dom';
 import Ratio from 'react-ratio';
+import { NoImage } from '../../common/NoImage/NoImage';
 
 export const Card = ({ type, item }) => {
 	const {
@@ -11,20 +12,27 @@ export const Card = ({ type, item }) => {
 		original_name,
 		year,
 	} = item;
-	// console.log(item);
+
 	return (
-		// <div className={styles.item} key={id}>
 		<div className={styles.item}>
 			<Link to={`/${type}/${id}`}>
 				<Ratio ratio={2 / 3} className={styles.ratio}>
-					<div className={styles.image}>
-						<img src={`https://image.tmdb.org/t/p/w300${poster}`} alt='image' />
+					<div className={styles.img_block}>
+						{poster ? (
+							<img
+								src={`https://image.tmdb.org/t/p/w300${poster}`}
+								alt='image'
+							/>
+						) : (
+							<NoImage />
+						)}
 						<span className={styles.vote}>{vote}</span>
 					</div>
 				</Ratio>
 			</Link>
-
-			<Link to={`/${type}/${id}`}>{name || original_name}</Link>
+			<Link to={`/${type}/${id}`} className={styles.name}>
+				{name || original_name}
+			</Link>
 			<p>{year}</p>
 		</div>
 	);

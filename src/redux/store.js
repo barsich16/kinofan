@@ -1,9 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import filtersReducer from './slices/filtersSlice';
 import userReducer from './slices/userSlice';
-// import { setupListeners } from '@reduxjs/toolkit/query';
+import paginationReducer from './slices/paginationSlice';
 import { filmsApi } from './API/filmsAPI';
-import { paginationReducer } from './slices/paginationSlice';
 
 export const store = configureStore({
 	reducer: {
@@ -13,5 +12,7 @@ export const store = configureStore({
 		user: userReducer,
 	},
 	middleware: (getDefaultMiddleware) =>
-		getDefaultMiddleware().concat(filmsApi.middleware),
+		getDefaultMiddleware({
+			serializableCheck: false,
+		}).concat(filmsApi.middleware),
 });

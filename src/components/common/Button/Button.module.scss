@@ -1,5 +1,5 @@
 .button {
-  background-color: #005382;
+  background-color: var(--color-primary);
   padding: 13px 15px;
   border: none;
   border-radius: 5px;
@@ -10,7 +10,7 @@
   align-items: center;
   justify-content: center;
   font-weight: 500;
-  color: #fff;
+  color: var(--color-white);
   transition: transform 50ms ease-in-out, background-color linear .2s;
 
   @media(max-width: 576px) {
@@ -20,7 +20,7 @@
   }
 
   &:hover {
-    background-color: #003f63;
+    background-color: var(--color-dark-primary);
   }
 
   &:active {
