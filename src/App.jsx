@@ -1,7 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { MainLayout } from './layouts/MainLayout';
 import { Home } from './pages/Home';
-import { NotFound } from './pages/NotFound';
 import { FilmPage } from './pages/FilmPage';
 import { Films } from './components/Filters/Films/Films';
 import { Series } from './components/Filters/Series/Series';
@@ -9,6 +8,7 @@ import { Register } from './components/Authorisation/Register';
 import { Login } from './components/Authorisation/Login';
 import { useEffect } from 'react';
 import { useActions } from './hooks/useActions';
+import { NotFound } from './components/NotFound/NotFound';
 
 function App() {
 	const { setUser } = useActions();
@@ -18,7 +18,7 @@ function App() {
 		if (userData && userData.token) {
 			setUser(userData);
 		}
-	}, []);
+	}, [setUser]);
 
 	return (
 		<Routes>

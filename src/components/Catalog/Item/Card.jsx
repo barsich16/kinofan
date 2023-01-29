@@ -21,7 +21,7 @@ export const Card = ({ type, item }) => {
 						{poster ? (
 							<img
 								src={`https://image.tmdb.org/t/p/w300${poster}`}
-								alt='image'
+								alt={name}
 							/>
 						) : (
 							<NoImage />

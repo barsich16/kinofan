@@ -6,7 +6,7 @@ import { convertDate } from '../helpers/convertDate';
 export const FilmPage = ({ type }) => {
 	const { id } = useParams();
 
-	const { data, error, isFetching } = useGetFilmByIdQuery({ id, type });
+	const { data, isFetching } = useGetFilmByIdQuery({ id, type });
 
 	const getOptions = (type) => {
 		const typeMedia = type;

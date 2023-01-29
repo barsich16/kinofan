@@ -5,9 +5,11 @@ import { useGetNewFilmsByTypeQuery } from '../redux/API/filmsAPI';
 import { Loader } from '../components/Loader/Loader';
 
 export const Home = () => {
-	const { data, error, isFetching, isLoading } = useGetNewFilmsByTypeQuery({});
+	const { data, isFetching, isLoading } = useGetNewFilmsByTypeQuery({});
 
 	if (isFetching || isLoading) return <Loader />;
+
+	console.log(data);
 
 	return (
 		<>

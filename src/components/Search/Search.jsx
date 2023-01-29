@@ -15,7 +15,7 @@ export const Search = ({ isFetching, type, visible, setVisible }) => {
 	const { resetFilters, setPage, setFilters } = useActions();
 	const currentYear = getCurrentYear();
 
-	const { data: genres, error } = useGetFilmsGenresQuery(type);
+	const { data: genres } = useGetFilmsGenresQuery(type);
 	const sorting = [
 		{ label: 'Популярністю (спадання)', value: 'popularity.desc' },
 		{ label: 'Популярністю (зростання)', value: 'popularity.asc' },

@@ -6,7 +6,7 @@ import Skeleton from 'react-loading-skeleton';
 import { NoImage } from '../../common/NoImage/NoImage';
 
 export const Actors = ({ mediaId: id, mediaType: type }) => {
-	const { data, error, isFetching } = useGetActorsQuery({ id, type });
+	const { data, isFetching } = useGetActorsQuery({ id, type });
 
 	const actors = isFetching
 		? new Array(5).fill().map((_, index) => <SkeletonCard key={index} />)
@@ -26,7 +26,7 @@ const Card = ({ photo, name, character }) => {
 						<img
 							className={styles.image}
 							src={`https://image.tmdb.org/t/p/w300${photo}`}
-							alt='image'
+							alt={name}
 						/>
 					) : (
 						<NoImage />

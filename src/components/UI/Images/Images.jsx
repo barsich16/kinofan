@@ -7,7 +7,7 @@ import { useGetImagesQuery } from '../../../redux/API/filmsAPI';
 import { Loader } from '../../Loader/Loader';
 
 export const Images = ({ id, type }) => {
-	const { data, error, isFetching } = useGetImagesQuery({ id, type });
+	const { data, isFetching } = useGetImagesQuery({ id, type });
 	if (isFetching) return <Loader />;
 
 	return (

@@ -15,7 +15,7 @@ export const Login = () => {
 		if (isAuth) {
 			navigate('/');
 		}
-	}, [isAuth]);
+	}, [isAuth, navigate]);
 
 	const formik = useFormik({
 		initialValues: {

@@ -13,7 +13,7 @@ export const Catalog = ({ type = 'movie' }) => {
 	const [items, setItems] = useState([]);
 	const [countForView, setCountForView] = useState(10);
 
-	const { data, error, isFetching } = useGetNewFilmsByTypeQuery({ page, type });
+	const { data, isFetching } = useGetNewFilmsByTypeQuery({ page, type });
 
 	useEffect(() => {
 		if (data) {

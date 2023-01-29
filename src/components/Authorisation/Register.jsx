@@ -14,7 +14,7 @@ export const Register = () => {
 		if (isAuth) {
 			navigate('/');
 		}
-	}, [isAuth]);
+	}, [isAuth, navigate]);
 
 	const formik = useFormik({
 		initialValues: {

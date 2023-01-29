@@ -13,8 +13,9 @@
     }
 
     .return {
-      display: flex;
+      display: inline-flex;
       align-items: center;
+      cursor: pointer;
 
       span {
         margin-left: 5px;

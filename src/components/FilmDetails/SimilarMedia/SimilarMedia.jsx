@@ -2,10 +2,10 @@ import { useGetSimilarMediaQuery } from '../../../redux/API/filmsAPI';
 import { Carousel } from '../../Swiper/Swiper';
 import { Card } from '../../Catalog/Item/Card';
 import { translateMovieType } from '../../../helpers/translateMovieType';
-import { SkeletonCard, SkeletonCards } from '../../Catalog/Item/SkeletonCards';
+import { SkeletonCard } from '../../Catalog/Item/SkeletonCards';
 
 export const SimilarMedia = ({ mediaId: id, mediaType: type }) => {
-	const { data, error, isFetching } = useGetSimilarMediaQuery({ id, type });
+	const { data, isFetching } = useGetSimilarMediaQuery({ id, type });
 
 	const similar = isFetching
 		? new Array(5).fill().map((_, index) => <SkeletonCard key={index} />)

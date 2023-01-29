@@ -15,7 +15,7 @@ export const Pagination = ({ totalPages = 1 }) => {
 
 	useEffect(() => {
 		resetPage();
-	}, []);
+	}, [resetPage]);
 
 	const changePage = (newPage) => {
 		setPage(newPage);

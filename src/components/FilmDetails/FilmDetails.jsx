@@ -55,7 +55,7 @@ export const FilmDetails = ({ type, data, id, getOptions, isFetching }) => {
 							<div className={styles.image_block}>
 								<img
 									src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-									alt='Image'
+									alt={name}
 									className={styles.poster}
 								/>
 								<span className={styles.rating}>{rating}</span>

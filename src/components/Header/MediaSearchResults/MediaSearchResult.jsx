@@ -3,7 +3,6 @@ import { useSearchMediaByNameQuery } from '../../../redux/API/filmsAPI';
 import styles from './MediaSearchResults.module.scss';
 import { Link } from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton';
-import { FiImage, FiTv } from 'react-icons/fi';
 import { NoImage } from '../../common/NoImage/NoImage';
 
 export const MediaSearchResults = forwardRef(({ searchTerm = '' }, ref) => {
