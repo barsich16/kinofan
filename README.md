@@ -10,8 +10,7 @@ Front-end додаток для пошуку фильмів та серіалі�
 -   Scss, CSS modules
 -   Formik
 
-UI
-
+UI:
 -   Lightgallery 
 -   Swiper
 -   react-loading-skeleton
